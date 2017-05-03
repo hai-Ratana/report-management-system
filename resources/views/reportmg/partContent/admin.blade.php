@@ -22,6 +22,7 @@
         <table class="table table-bordered table-striped">
         <thead>
           <tr>
+          <th>No</th>
             <th>Firstname</th>
             <th>Lastname</th>
             <th>Email</th>
@@ -31,17 +32,31 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>john@example.com</td>
-            <td>admin</td>
-            <td>ooo1</td>
+         
+          @if(!empty($users))
+            @foreach($users as $key => $user)
+             <tr>
+            <td>{!! ($key+1) !!}</td>
+            <td>{!! $user->firstname !!}</td>
+            <td>{!! $user->lastname !!}</td>
+            <td>{!! $user->email !!}</td>
             <td>
+            @if($user->role ==1)
+                admin
+              @else
+                User
+            @endif
+            </td>
+             <td>......</td>
+            <td>
+
               <button class="btn btn-primary">Edit</button>
               <button class="btn btn-danger">Delete</button>
             </td>
-          </tr>
+            </tr>
+            @endforeach
+          @endif
+          
           
         </tbody>
       </table>

@@ -12,7 +12,7 @@
                      <p class="text-center text-primary profile-title">Phnom Penh Institute of Technology</p>
                 <form class="form-signin" role="form" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
-                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}"  placeholder="username" required autofocus>
+                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}"  placeholder="email" required autofocus>
                 <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                 login</button>

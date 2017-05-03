@@ -4,7 +4,8 @@
   
     <!-- jQuery -->
  <script src="js/bootstrap-datetimepicker.js"></script>
-  <script src="js/bootstrap-datepicker.js"></script>
+ <script src="js/bootstrap-datetimepicker1.min.js"></script>
+  <script src="js/bootstrap-datepicker.min.js"></script>
   <script src="js/lumino.glyphs.js"></script>
 
   <script type="text/javascript">
@@ -12,11 +13,17 @@
       todayHighlight: 1,
        todayBtn:  1,
        startView: 2,
-    minView: 2,
+        minView: 2,
 
 		});
- $('[data-tooltip="tooltip"]').tooltip();   
-
+    $('.timeInput').datetimepicker({
+       weekStart: 1,
+        autoclose: 1,
+        startView:1 ,    
+        
+        showMeridian: 1
+    });
+ 
 		
   </script>
   

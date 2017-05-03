@@ -16,21 +16,52 @@
     <h2>Report List of Activity for Week:</h2>
     <br>
    <div class="table-responsive">
-     <table class="table table-striped ">
+     <table class="table table-bordered table-striped ">
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Day01</th>
-            <th>Day02</th>
-            <th>Day02</th>
-            <th>Day02</th>
-            <th>Day02</th>
-            <th>Day02</th>
-            <th>Total</th>
+            <th>No</th>
+            <th>Date</th>
+            <th>ProjectID</th>
+            <th>Project</th>
+            <th>Start</th>
+            <th>Stop</th>
+            <th>Break</th>
+            <th>Task</th>
+            <th>Action</th>
+            <th>Total hours</th>
+            <th>other</th>
           </tr>
         </thead>
         <tbody>
-          
+          @if(!empty($reports))
+            @foreach($reports as $key => $report)
+            <tr>
+              <td>{!! ($key+1) !!}</td>
+              <td>{!! date_format($report->created_at,"Y/m/d") !!}</td>
+              <td>OOP{!! $report->projectId !!}</td>
+              <td>{!! $report->project !!}</td>
+              <td>{!! $report->startTime !!}</td>
+              <td>{!! $report->stopTime !!}</td>
+              <td>{!! $report->breakTime !!}</td>
+              <td>{!! $report->task !!}</td>
+              <td>{!! $report->action !!}</td>
+              
+              <td>{!! $report->totalTime !!}</td>
+              <td>
+                
+                
+                  <button class=" btn btn-primary form-control">Edit</button>
+                
+                 
+                    <button class=" btn btn-danger form-control">Delete</button>
+                
+               
+              
+               
+              </td>
+            </tr>
+            @endforeach
+          @endif
         </tbody>
       </table>
    </div>

@@ -9,7 +9,7 @@
           <h4 class="modal-title">Create User</h4>
         </div>
         <div class="modal-body">
-          <form class="form-horizontal" action="{{ route('register') }}" method="post">
+          <form class="form-horizontal" action="{{ url('user') }}" method="post">
              {{ csrf_field() }}
         <!-- Text input-->
         <div class="form-group">
@@ -57,12 +57,12 @@
             
           </div>
         </div>
-        
+        <button id="save" type="sumit" name="save" class="btn btn-success">save</button>
         </form>
          
         </div>
         <div class="modal-footer">
-          <button id="save" type="sumit" name="save" class="btn btn-success">save</button>
+          
           <button id="button2id" name="button2id" class="btn btn-danger" data-dismiss="modal">reset</button>
           
         </div>

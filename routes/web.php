@@ -24,7 +24,13 @@ Route::get('/', function(){
 	return redirect('report');
 });
 Route::get('report','HomeController@user');
+Route::get('test','HomeController@test');
 
 
 Route::post('project','HomeController@createProject');
+
+Route::post('user','HomeController@createUser');
+Route::post('create/report','HomeController@createReport');
+
+
 

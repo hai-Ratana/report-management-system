@@ -1,6 +1,8 @@
-<form class="form-horizontal">
+<form class="form-horizontal" action="{{ url('create/report')}}" method="post">
+   {{ csrf_field() }}
 <div class="row">
-  
+
+   <input  type="hidden" class="form-control input-md" name="idUser" value="{!! Auth::user()->id !!}">
 
 <div class="col-lg-8">
     <!-- project ID -->
@@ -8,9 +10,9 @@
     <div class="form-group ">
       <label class="col-md-1 control-label" for="selectbasic">project ID</label>
         <div class="col-md-3">
-        <select  id="projectID" name="projectID" class=" form-control">
+        <select  id="projectID" name="projectId" class=" form-control">
           @foreach($projects as $key => $projectID)
-          <option value="{{!! $projectID->id !!}}">00P{!! $projectID->id !!}</option>
+          <option value="{!! $projectID->id !!}">00P{!! $projectID->id !!}</option>
           @endforeach
         </select>
         </div>
@@ -18,14 +20,14 @@
        <div class="col-md-3">
         <select id="project" name="project" class="  form-control">
           @foreach($projects as $key => $project)
-          <option value="{{!! $project->project !!}}">{!! $project->project !!}</option>
+          <option value="{!! $project->project !!}">{!! $project->project !!}</option>
           @endforeach
           
         </select>
       </div>
       <label class="col-md-1 control-label" for="textinput">Total Time</label>  
       <div class="col-md-3">
-      <input id="totalTime" name="totalTime" placeholder="Total Time" class=" form-control input-md" required="" type="text">
+      <input id="totalTime" name="totalTime" placeholder="Total Time" class=" form-control input-md " required="" type="text">
        </div> 
       
     </div>
@@ -37,11 +39,12 @@
     <div class="form-group">
       <label class=" col-md-1 control-label" for="textinput">Start Time</label>
       <div class="col-md-3">
-        <input id="startTime" name="startTime" placeholder="hh:mm:ss" class="form-control input-md" required="" type="text">
+        <input id="startTime" name="startTime" placeholder="hh:mm:ss" class="form-control date input-md timeInput"  data-date="" data-date-format=" HH:ii p" required="" type="text">
       </div>  
        <label class="col-md-1 control-label" for="textinput">Stop Time</label> 
       <div class="col-md-3">
-        <input id="stopTime" name="stopTime" placeholder="hh:mm:ss" class="form-control input-md" required="" type="text">
+        <input id="stopTime" name="stopTime" placeholder="hh:mm:ss" class="form-control date input-md timeInput"
+        data-date="" data-date-format=" HH:ii p"  required="" type="text">
       </div>  
       <label class="col-md-1 control-label" for="textinput">Break Time</label>  
       <div class="col-md-3">
@@ -64,7 +67,7 @@
       </div>
       <div class="row">
         <div class="col-md-10 col-md-offset-2">
-        <textarea class="form-control" id="tak" name="tak"></textarea>
+        <textarea class="form-control" id="tak" name="task"></textarea>
         </div>
       </div>
       
@@ -147,7 +150,7 @@
     
     <div class="col-md-4 col-md-offset-9 ">
       <button id="save" name="save" type="submit" class="btn btn-success">Save</button>
-      <button id="saveEmail" name="saveEmail" type="submit" class="btn btn-info">Save &amp; Send Email</button>
+      <button id="saveEmail" name="saveEmail"  class="btn btn-info">Save &amp; Send Email</button>
    
     </div>
       
