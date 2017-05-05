@@ -13,6 +13,6 @@
 
 ## Clone This Project
 
-	This Url: https://github.com/nakkettechnologies/Work-Report-Management.git .
+	This Url: (https://github.com/hai-Ratana/report-management-system.git) .
 
 
