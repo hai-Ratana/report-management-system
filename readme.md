@@ -15,4 +15,38 @@
 
 	This Url: (https://github.com/hai-Ratana/report-management-system.git) .
 
+## Config file .env
+	APP_ENV=local
+	APP_DEBUG=true
+	APP_KEY=base64:H/EiluFrN/BjUZEkwv1NKZJ2cax/af1Oqx4PFrTM5N8=
+	APP_URL=http://yourUrl 		<!--  ! default http://localhost in Xampp and MAMP -->
+
+	DB_CONNECTION=mysql
+	DB_HOST=127.0.0.1  		<!-- name host -->
+	DB_PORT=3306			<!-- port host -->
+	DB_DATABASE=yourDatabse  	<!-- name database -->
+	DB_USERNAME="root"  		<!-- name user  -->
+	DB_PASSWORD=""			<!-- password  -->
+	CACHE_DRIVER=file
+	SESSION_DRIVER=file
+	QUEUE_DRIVER=sync
+
+	REDIS_HOST=127.0.0.1"
+	REDIS_PASSWORD=null
+	REDIS_PORT=6379
+
+	MAIL_DRIVER=smtp
+	MAIL_HOST=mailtrap.io
+	MAIL_PORT=2525
+	MAIL_USERNAME=null
+	MAIL_PASSWORD=null
+	MAIL_ENCRYPTION=null
+
+## Using Command line for this project
+	"php artisan key:generate " to generate new key.
+
+
+	"php artisan migrate --seed" to generate table user on database.
+
+
 
