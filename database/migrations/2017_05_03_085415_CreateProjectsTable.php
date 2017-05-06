@@ -13,12 +13,12 @@ class CreateProjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('projectTable', function (Blueprint $table) {
+        Schema::create('projecttable', function (Blueprint $table) {
             $table->increments('id');
             $table->string('project')->unique();
-            $table->string('description');
+            $table->string('description',null);
             $table->string('duration');
-            $table->string('other');
+            $table->string('other',null);
             
             
             $table->timestamps();
@@ -32,6 +32,6 @@ class CreateProjectsTable extends Migration
      */
     public function down()
     {
-       Schema::dropIfExists('projectTable');
+       Schema::dropIfExists('projecttable');
     }
 }

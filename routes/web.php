@@ -20,7 +20,11 @@ Auth::logout();
 return redirect('report');
 });
 
+Route::get('/', function(){
+	return redirect('report');
+});
 Route::get('report','HomeController@user');
+
 
 Route::post('project','HomeController@createProject');
 

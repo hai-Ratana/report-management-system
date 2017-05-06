@@ -18,5 +18,12 @@ class UsersTableSeeder extends Seeder
             'role' => 1,
             'password' => bcrypt('1234'),
         ]);
+        DB::table('projecttable')->insert([
+            'project' => 'report management system',
+            'description' => 'for actvity working',
+            'duration' => '3 week',
+            'other' => 'null'
+
+            ]);
     }
 }
