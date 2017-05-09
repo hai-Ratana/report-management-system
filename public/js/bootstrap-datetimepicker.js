@@ -1,5 +1,5 @@
 ﻿/* =========================================================
- * bootstrap-datetimepicker.js
+ * bootstrap-timedatepicker.js
  * =========================================================
  * Copyright 2012 Stefan Petre
  *
@@ -10,7 +10,7 @@
  * Improvements by CuGBabyBeaR
  * Improvements by Christian Vaas <auspex@auspex.eu>
  *
- * Project URL : http://www.malot.fr/bootstrap-datetimepicker
+ * Project URL : http://www.malot.fr/bootstrap-timedatepicker
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -73,13 +73,13 @@
   }
 
   // Picker object
-  var Datetimepicker = function (element, options) {
+  var timedatepicker = function (element, options) {
     var that = this;
 
     this.element = $(element);
 
     // add container for single page application
-    // when page switch the datetimepicker div will be removed also.
+    // when page switch the timedatepicker div will be removed also.
     this.container = options.container || 'body';
 
     this.language = options.language || this.element.data('date-language') || 'en';
@@ -120,8 +120,8 @@
     this._attachEvents();
 
     this.clickedOutside = function (e) {
-        // Clicked outside the datetimepicker, hide it
-        if ($(e.target).closest('.datetimepicker').length === 0) {
+        // Clicked outside the timedatepicker, hide it
+        if ($(e.target).closest('.timedatepicker').length === 0) {
             that.hide();
         }
     }
@@ -220,12 +220,12 @@
     }
 
     if (this.isInline) {
-      this.picker.addClass('datetimepicker-inline');
+      this.picker.addClass('timedatepicker-inline');
     } else {
-      this.picker.addClass('datetimepicker-dropdown-' + this.pickerPosition + ' dropdown-menu');
+      this.picker.addClass('timedatepicker-dropdown-' + this.pickerPosition + ' dropdown-menu');
     }
     if (this.isRTL) {
-      this.picker.addClass('datetimepicker-rtl');
+      this.picker.addClass('timedatepicker-rtl');
       var selector = this.bootcssVer === 3 ? '.prev span, .next span' : '.prev i, .next i';
       this.picker.find(selector).toggleClass(this.icons.leftArrow + ' ' + this.icons.rightArrow);
     }
@@ -333,8 +333,8 @@
     }
   };
 
-  Datetimepicker.prototype = {
-    constructor: Datetimepicker,
+  timedatepicker.prototype = {
+    constructor: timedatepicker,
 
     _events:       [],
     _attachEvents: function () {
@@ -367,7 +367,7 @@
           ]);
         }
       }
-      else if (this.element.is('div')) {  // inline datetimepicker
+      else if (this.element.is('div')) {  // inline timedatepicker
         this.isInline = true;
       }
       else {
@@ -443,7 +443,7 @@
       $(document).off('mousedown', this.clickedOutside);
       this.picker.remove();
       delete this.picker;
-      delete this.element.data().datetimepicker;
+      delete this.element.data().timedatepicker;
     },
 
     getDate: function () {
@@ -694,7 +694,7 @@
         html += '<th class="dow">' + dates[this.language].daysMin[(dowCnt++) % 7] + '</th>';
       }
       html += '</tr>';
-      this.picker.find('.datetimepicker-days thead').append(html);
+      this.picker.find('.timedatepicker-days thead').append(html);
     },
 
     fillMonths: function () {
@@ -705,7 +705,7 @@
         var classes = this.onRenderMonth(d);
         html += '<span class="' + classes.join(' ') + '">' + dates[this.language].monthsShort[i] + '</span>';
       }
-      this.picker.find('.datetimepicker-months td').html(html);
+      this.picker.find('.timedatepicker-months td').html(html);
     },
 
     fill: function () {
@@ -723,14 +723,14 @@
         endMonth = this.endDate.getUTCMonth() + 1,
         currentDate = (new UTCDate(this.date.getUTCFullYear(), this.date.getUTCMonth(), this.date.getUTCDate())).valueOf(),
         today = new Date();
-      this.setTitle('.datetimepicker-days', dates[this.language].months[month] + ' ' + year)
+      this.setTitle('.timedatepicker-days', dates[this.language].months[month] + ' ' + year)
       if (this.formatViewType === 'time') {
         var formatted = this.getFormattedDate();
-        this.setTitle('.datetimepicker-hours', formatted);
-        this.setTitle('.datetimepicker-minutes', formatted);
+        this.setTitle('.timedatepicker-hours', formatted);
+        this.setTitle('.timedatepicker-minutes', formatted);
       } else {
-        this.setTitle('.datetimepicker-hours', dayMonth + ' ' + dates[this.language].months[month] + ' ' + year);
-        this.setTitle('.datetimepicker-minutes', dayMonth + ' ' + dates[this.language].months[month] + ' ' + year);
+        this.setTitle('.timedatepicker-hours', dayMonth + ' ' + dates[this.language].months[month] + ' ' + year);
+        this.setTitle('.timedatepicker-minutes', dayMonth + ' ' + dates[this.language].months[month] + ' ' + year);
       }
       this.picker.find('tfoot th.today')
         .text(dates[this.language].today || dates['en'].today)
@@ -780,7 +780,7 @@
         }
         prevMonth.setUTCDate(prevMonth.getUTCDate() + 1);
       }
-      this.picker.find('.datetimepicker-days tbody').empty().append(html.join(''));
+      this.picker.find('.timedatepicker-days tbody').empty().append(html.join(''));
 
       html = [];
       var txt = '', meridian = '', meridianOld = '';
@@ -823,7 +823,7 @@
           html.push('<span class="' + classes.join(' ') + '">' + txt + '</span>');
         }
       }
-      this.picker.find('.datetimepicker-hours td').html(html.join(''));
+      this.picker.find('.timedatepicker-hours td').html(html.join(''));
 
       html = [];
       txt = '';
@@ -855,10 +855,10 @@
           html.push('<span class="' + classes.join(' ') + '">' + hours + ':' + (i < 10 ? '0' + i : i) + '</span>');
         }
       }
-      this.picker.find('.datetimepicker-minutes td').html(html.join(''));
+      this.picker.find('.timedatepicker-minutes td').html(html.join(''));
 
       var currentYear = this.date.getUTCFullYear();
-      var months = this.setTitle('.datetimepicker-months', year)
+      var months = this.setTitle('.timedatepicker-months', year)
         .end()
         .find('.month').removeClass('active');
       if (currentYear === year) {
@@ -878,7 +878,7 @@
 
       html = '';
       year = parseInt(year / 10, 10) * 10;
-      var yearCont = this.setTitle('.datetimepicker-years', year + '-' + (year + 9))
+      var yearCont = this.setTitle('.timedatepicker-years', year + '-' + (year + 9))
         .end()
         .find('td');
       year -= 1;
@@ -1433,15 +1433,15 @@
       }
       /*
        vitalets: fixing bug of very special conditions:
-       jquery 1.7.1 + webkit + show inline datetimepicker in bootstrap popover.
-       Method show() does not set display css correctly and datetimepicker is not shown.
+       jquery 1.7.1 + webkit + show inline timedatepicker in bootstrap popover.
+       Method show() does not set display css correctly and timedatepicker is not shown.
        Changed to .css('display', 'block') solve the problem.
        See https://github.com/vitalets/x-editable/issues/37
 
        In jquery 1.7.2+ everything works fine.
        */
-      //this.picker.find('>div').hide().filter('.datetimepicker-'+DPGlobal.modes[this.viewMode].clsName).show();
-      this.picker.find('>div').hide().filter('.datetimepicker-' + DPGlobal.modes[this.viewMode].clsName).css('display', 'block');
+      //this.picker.find('>div').hide().filter('.timedatepicker-'+DPGlobal.modes[this.viewMode].clsName).show();
+      this.picker.find('>div').hide().filter('.timedatepicker-' + DPGlobal.modes[this.viewMode].clsName).css('display', 'block');
       this.updateNavArrows();
     },
 
@@ -1465,17 +1465,17 @@
     }
   };
 
-  var old = $.fn.datetimepicker;
-  $.fn.datetimepicker = function (option) {
+  var old = $.fn.timedatepicker;
+  $.fn.timedatepicker = function (option) {
     var args = Array.apply(null, arguments);
     args.shift();
     var internal_return;
     this.each(function () {
       var $this = $(this),
-        data = $this.data('datetimepicker'),
+        data = $this.data('timedatepicker'),
         options = typeof option === 'object' && option;
       if (!data) {
-        $this.data('datetimepicker', (data = new Datetimepicker(this, $.extend({}, $.fn.datetimepicker.defaults, options))));
+        $this.data('timedatepicker', (data = new timedatepicker(this, $.extend({}, $.fn.timedatepicker.defaults, options))));
       }
       if (typeof option === 'string' && typeof data[option] === 'function') {
         internal_return = data[option].apply(data, args);
@@ -1490,10 +1490,10 @@
       return this;
   };
 
-  $.fn.datetimepicker.defaults = {
+  $.fn.timedatepicker.defaults = {
   };
-  $.fn.datetimepicker.Constructor = Datetimepicker;
-  var dates = $.fn.datetimepicker.dates = {
+  $.fn.timedatepicker.Constructor = timedatepicker;
+  var dates = $.fn.timedatepicker.dates = {
     en: {
       days:        ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
       daysShort:   ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
@@ -1604,13 +1604,13 @@
               date.setUTCDate(date.getUTCDate() + dir);
               break;
             case 'm':
-              date = Datetimepicker.prototype.moveMonth.call(Datetimepicker.prototype, date, dir);
+              date = timedatepicker.prototype.moveMonth.call(timedatepicker.prototype, date, dir);
               break;
             case 'w':
               date.setUTCDate(date.getUTCDate() + dir * 7);
               break;
             case 'y':
-              date = Datetimepicker.prototype.moveYear.call(Datetimepicker.prototype, date, dir);
+              date = timedatepicker.prototype.moveYear.call(timedatepicker.prototype, date, dir);
               break;
           }
         }
@@ -1862,36 +1862,36 @@
                     '<tr><th colspan="7" class="clear"></th></tr>' +
                   '</tfoot>'
   };
-  DPGlobal.template = '<div class="datetimepicker">' +
-    '<div class="datetimepicker-minutes">' +
+  DPGlobal.template = '<div class="timedatepicker">' +
+    '<div class="timedatepicker-minutes">' +
     '<table class=" table-condensed">' +
     DPGlobal.headTemplate +
     DPGlobal.contTemplate +
     DPGlobal.footTemplate +
     '</table>' +
     '</div>' +
-    '<div class="datetimepicker-hours">' +
+    '<div class="timedatepicker-hours">' +
     '<table class=" table-condensed">' +
     DPGlobal.headTemplate +
     DPGlobal.contTemplate +
     DPGlobal.footTemplate +
     '</table>' +
     '</div>' +
-    '<div class="datetimepicker-days">' +
+    '<div class="timedatepicker-days">' +
     '<table class=" table-condensed">' +
     DPGlobal.headTemplate +
     '<tbody></tbody>' +
     DPGlobal.footTemplate +
     '</table>' +
     '</div>' +
-    '<div class="datetimepicker-months">' +
+    '<div class="timedatepicker-months">' +
     '<table class="table-condensed">' +
     DPGlobal.headTemplate +
     DPGlobal.contTemplate +
     DPGlobal.footTemplate +
     '</table>' +
     '</div>' +
-    '<div class="datetimepicker-years">' +
+    '<div class="timedatepicker-years">' +
     '<table class="table-condensed">' +
     DPGlobal.headTemplate +
     DPGlobal.contTemplate +
@@ -1899,36 +1899,36 @@
     '</table>' +
     '</div>' +
     '</div>';
-  DPGlobal.templateV3 = '<div class="datetimepicker">' +
-    '<div class="datetimepicker-minutes">' +
+  DPGlobal.templateV3 = '<div class="timedatepicker">' +
+    '<div class="timedatepicker-minutes">' +
     '<table class=" table-condensed">' +
     DPGlobal.headTemplateV3 +
     DPGlobal.contTemplate +
     DPGlobal.footTemplate +
     '</table>' +
     '</div>' +
-    '<div class="datetimepicker-hours">' +
+    '<div class="timedatepicker-hours">' +
     '<table class=" table-condensed">' +
     DPGlobal.headTemplateV3 +
     DPGlobal.contTemplate +
     DPGlobal.footTemplate +
     '</table>' +
     '</div>' +
-    '<div class="datetimepicker-days">' +
+    '<div class="timedatepicker-days">' +
     '<table class=" table-condensed">' +
     DPGlobal.headTemplateV3 +
     '<tbody></tbody>' +
     DPGlobal.footTemplate +
     '</table>' +
     '</div>' +
-    '<div class="datetimepicker-months">' +
+    '<div class="timedatepicker-months">' +
     '<table class="table-condensed">' +
     DPGlobal.headTemplateV3 +
     DPGlobal.contTemplate +
     DPGlobal.footTemplate +
     '</table>' +
     '</div>' +
-    '<div class="datetimepicker-years">' +
+    '<div class="timedatepicker-years">' +
     '<table class="table-condensed">' +
     DPGlobal.headTemplateV3 +
     DPGlobal.contTemplate +
@@ -1936,32 +1936,32 @@
     '</table>' +
     '</div>' +
     '</div>';
-  $.fn.datetimepicker.DPGlobal = DPGlobal;
+  $.fn.timedatepicker.DPGlobal = DPGlobal;
 
-  /* DATETIMEPICKER NO CONFLICT
+  /* timedatepicker NO CONFLICT
    * =================== */
 
-  $.fn.datetimepicker.noConflict = function () {
-    $.fn.datetimepicker = old;
+  $.fn.timedatepicker.noConflict = function () {
+    $.fn.timedatepicker = old;
     return this;
   };
 
-  /* DATETIMEPICKER DATA-API
+  /* timedatepicker DATA-API
    * ================== */
 
   $(document).on(
-    'focus.datetimepicker.data-api click.datetimepicker.data-api',
-    '[data-provide="datetimepicker"]',
+    'focus.timedatepicker.data-api click.timedatepicker.data-api',
+    '[data-provide="timedatepicker"]',
     function (e) {
       var $this = $(this);
-      if ($this.data('datetimepicker')) return;
+      if ($this.data('timedatepicker')) return;
       e.preventDefault();
       // component click requires us to explicitly show it
-      $this.datetimepicker('show');
+      $this.timedatepicker('show');
     }
   );
   $(function () {
-    $('[data-provide="datetimepicker-inline"]').datetimepicker();
+    $('[data-provide="timedatepicker-inline"]').timedatepicker();
   });
 
 }));

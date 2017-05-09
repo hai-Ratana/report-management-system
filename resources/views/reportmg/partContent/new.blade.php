@@ -12,23 +12,26 @@
         <div class="col-md-3">
         <select  id="projectID" name="projectId" class=" form-control">
           @foreach($projects as $key => $projectID)
-          <option value="{!! $projectID->id !!}">00P{!! $projectID->id !!}</option>
+          <option value="{!! $projectID->id !!}" class="selecteVal" data-index="{!! $key !!}">00P{!! $projectID->id !!}</option>
           @endforeach
         </select>
         </div>
         <label class="col-md-1 control-label" for="selectbasic">project</label>
        <div class="col-md-3">
+       <!-- <input id="totalTime" name="project" placeholder="project" class=" form-control input-md " required="" type="text"> -->
         <select id="project" name="project" class="  form-control">
+
           @foreach($projects as $key => $project)
-          <option value="{!! $project->project !!}">{!! $project->project !!}</option>
+          <option  value="{!! $project->project !!}"  >{!! $project->project !!}</option>
           @endforeach
           
         </select>
       </div>
-      <label class="col-md-1 control-label" for="textinput">Total Time</label>  
+      <label class="col-md-1 control-label" for="textinput">Break Time</label>  
       <div class="col-md-3">
-      <input id="totalTime" name="totalTime" placeholder="Total Time" class=" form-control input-md " required="" type="text">
-       </div> 
+         <input id="breakTime" name="breakTime" placeholder="hh:mn" class="form-control input-md "  required="" type="text">
+      </div>
+      
       
     </div>
 
@@ -39,17 +42,18 @@
     <div class="form-group">
       <label class=" col-md-1 control-label" for="textinput">Start Time</label>
       <div class="col-md-3">
-        <input id="startTime" name="startTime" placeholder="hh:mm:ss" class="form-control date input-md timeInput"  data-date="" data-date-format=" HH:ii p" required="" type="text">
+        <input name="startTime" placeholder="hh:mn" class="form-control date input-md "  data-date="" data-date-format=" HH:ii p" required="" type="text">
       </div>  
        <label class="col-md-1 control-label" for="textinput">Stop Time</label> 
       <div class="col-md-3">
-        <input id="stopTime" name="stopTime" placeholder="hh:mm:ss" class="form-control date input-md timeInput"
+        <input id="endTime" name="stopTime" placeholder="hh:mn" class="form-control date input-md "
         data-date="" data-date-format=" HH:ii p"  required="" type="text">
       </div>  
-      <label class="col-md-1 control-label" for="textinput">Break Time</label>  
+      <label class="col-md-1 control-label" for="textinput">Total Time</label>  
       <div class="col-md-3">
-         <input id="breakTime" name="breakTime" placeholder="mm:ss" class="form-control input-md" required="" type="text">
-      </div>
+      <input id="totalTime" name="totalTime" placeholder="Total Time" class=" form-control input-md " required="" readonly type="text">
+       </div> 
+
     </div>
 
     
@@ -67,7 +71,7 @@
       </div>
       <div class="row">
         <div class="col-md-10 col-md-offset-2">
-        <textarea class="form-control" id="tak" name="task"></textarea>
+        <textarea class="form-control" id="tak" rows="5"  name="task"></textarea>
         </div>
       </div>
       
@@ -82,7 +86,7 @@
       </div>
       <div class="row">
         <div class="col-md-10 col-md-offset-2">
-        <textarea class="form-control" id="action" name="action"></textarea>
+        <textarea class="form-control" rows="5" id="action" name="action"></textarea>
         </div>
       </div>
     </div>
@@ -103,7 +107,7 @@
       </div>
       <div class="row">
         <div class="col-md-10 col-md-offset-2">
-        <textarea class="form-control" id="knowledge" name="knowledge"></textarea>
+        <textarea class="form-control" rows="5" id="knowledge" name="knowledge"></textarea>
         </div>
       </div>
       
@@ -118,7 +122,7 @@
       </div>
       <div class="row">
         <div class="col-md-10 col-md-offset-2">
-        <textarea class="form-control" id="impression" name="impression"></textarea>
+        <textarea class="form-control" rows="5" id="impression" name="impression"></textarea>
         </div>
       </div>
     </div>

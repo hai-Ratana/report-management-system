@@ -31,11 +31,17 @@ class HomeController extends Controller
          $user = Auth::user()->id;
         $Project = Project::all();
         $users = User::all();
-        $reports = Report::where('idUser',$user)->get();
+        if(Auth::user()->role == 1){
+            $reports = Report::paginate(5);
+        }else{
+            $reports = Report::where('idUser',$user)->get();
+        }
+        
         return view('/reportmg/content',[
             'projects' => $Project,
             'users' => $users,
-            'reports' => $reports
+            'reports' => $reports,
+            'active' =>'active'
             ]);
     }
     

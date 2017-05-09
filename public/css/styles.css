@@ -59,7 +59,7 @@
 
 /*Calendar Widget*/
 
-#calendar, .datetimepicker-inline {
+#calendar, .timedatepicker-inline {
 	width: 100%;
 }
 
@@ -67,45 +67,45 @@
 	width: 100%;
 }
 
-.datetimepicker table tr td.old,
-.datetimepicker table tr td.new {
+.timedatepicker table tr td.old,
+.timedatepicker table tr td.new {
 	color: rgba(255, 255, 255, .50);
 }
 
-.datetimepicker table tr td.active,
-.datetimepicker table tr td.active:hover,
-.datetimepicker table tr td.active.disabled,
-.datetimepicker table tr td.active.disabled:hover,
-.datetimepicker table tr td.active:hover,
-.datetimepicker table tr td.active:hover:hover,
-.datetimepicker table tr td.active.disabled:hover,
-.datetimepicker table tr td.active.disabled:hover:hover,
-.datetimepicker table tr td.active:focus,
-.datetimepicker table tr td.active:hover:focus,
-.datetimepicker table tr td.active.disabled:focus,
-.datetimepicker table tr td.active.disabled:hover:focus,
-.datetimepicker table tr td.active:active,
-.datetimepicker table tr td.active:hover:active,
-.datetimepicker table tr td.active.disabled:active,
-.datetimepicker table tr td.active.disabled:hover:active,
-.datetimepicker table tr td.active.active,
-.datetimepicker table tr td.active:hover.active,
-.datetimepicker table tr td.active.disabled.active,
-.datetimepicker table tr td.active.disabled:hover.active,
-.open .dropdown-toggle.datetimepicker table tr td.active,
-.open .dropdown-toggle.datetimepicker table tr td.active:hover,
-.open .dropdown-toggle.datetimepicker table tr td.active.disabled,
-.open .dropdown-toggle.datetimepicker table tr td.active.disabled:hover {
+.timedatepicker table tr td.active,
+.timedatepicker table tr td.active:hover,
+.timedatepicker table tr td.active.disabled,
+.timedatepicker table tr td.active.disabled:hover,
+.timedatepicker table tr td.active:hover,
+.timedatepicker table tr td.active:hover:hover,
+.timedatepicker table tr td.active.disabled:hover,
+.timedatepicker table tr td.active.disabled:hover:hover,
+.timedatepicker table tr td.active:focus,
+.timedatepicker table tr td.active:hover:focus,
+.timedatepicker table tr td.active.disabled:focus,
+.timedatepicker table tr td.active.disabled:hover:focus,
+.timedatepicker table tr td.active:active,
+.timedatepicker table tr td.active:hover:active,
+.timedatepicker table tr td.active.disabled:active,
+.timedatepicker table tr td.active.disabled:hover:active,
+.timedatepicker table tr td.active.active,
+.timedatepicker table tr td.active:hover.active,
+.timedatepicker table tr td.active.disabled.active,
+.timedatepicker table tr td.active.disabled:hover.active,
+.open .dropdown-toggle.timedatepicker table tr td.active,
+.open .dropdown-toggle.timedatepicker table tr td.active:hover,
+.open .dropdown-toggle.timedatepicker table tr td.active.disabled,
+.open .dropdown-toggle.timedatepicker table tr td.active.disabled:hover {
 	color: #ffffff;
 	background-color: rgba(0, 0, 0, .5);
 	border-color: #285e8e;
 }
 
-.datetimepicker table tr td span:hover,
-.datetimepicker thead tr:first-child th:hover,
-.datetimepicker tfoot tr th:hover,
-.datetimepicker table tr td.day:hover,
-.datetimepicker table tr td.day.focused {
+.timedatepicker table tr td span:hover,
+.timedatepicker thead tr:first-child th:hover,
+.timedatepicker tfoot tr th:hover,
+.timedatepicker table tr td.day:hover,
+.timedatepicker table tr td.day.focused {
 	background: rgba(0, 0, 0, 0.25);
 }
 

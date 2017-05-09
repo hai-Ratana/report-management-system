@@ -1,16 +1,26 @@
-<div class="form-group  ">
-      <div class="col-md-6 pull-right">
-          <label class="col-md-2 col-md-offset-4 control-label " for="selectbasic">Month:</label>
-          <div class="col-md-6 ">
+<div class="row">
+   <div class="col-md-6 pull-right">
+          <label class="col-md-2 control-label " for="selectbasic">Month:</label>
+          <div class="col-md-4  ">
+          <select  id="selectbasic" name="selectbasic" class=" form-control">
+            <option value="1">Option one</option>
+            <option value="2">Option two</option>
+          </select>
+          </div>
+      
+      
+          <label class="col-md-2 control-label " for="selectbasic">Year:</label>
+          <div class="col-md-4 ">
           <select  id="selectbasic" name="selectbasic" class=" form-control">
             <option value="1">Option one</option>
             <option value="2">Option two</option>
           </select>
           </div>
       </div>
-       
+</div>
+     
           
-      </div>
+
  <div class="row">
   <div class="col-md-12">
     <h2>Report List of Activity for Week:</h2>
@@ -29,7 +39,9 @@
             <th>Task</th>
             <th>Action</th>
             <th>Total hours</th>
+            @if(Auth::user()->role ==1)
             <th>other</th>
+            @endif
           </tr>
         </thead>
         <tbody>
@@ -47,6 +59,7 @@
               <td>{!! $report->action !!}</td>
               
               <td>{!! $report->totalTime !!}</td>
+               @if(Auth::user()->role ==1)
               <td>
                 
                 
@@ -59,15 +72,17 @@
               
                
               </td>
+               @endif
             </tr>
             @endforeach
-          @endif
+        
         </tbody>
       </table>
    </div>
-     
-             
-  
+     <div class="text-center">
+    {!! $reports->links() !!}
+</div>
+    @endif
   </div>
    
  </div>

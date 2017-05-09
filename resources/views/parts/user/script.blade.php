@@ -7,9 +7,10 @@
  <script src="js/bootstrap-datetimepicker1.min.js"></script>
   <script src="js/bootstrap-datepicker.min.js"></script>
   <script src="js/lumino.glyphs.js"></script>
+  <script src="js/event.js"></script>
 
   <script type="text/javascript">
-  	$('#calendar').datetimepicker({
+  	$('#calendar').timedatepicker({
       todayHighlight: 1,
        todayBtn:  1,
        startView: 2,
@@ -23,7 +24,7 @@
         
         showMeridian: 1
     });
- 
+    
 		
   </script>
   
