@@ -34,45 +34,53 @@ class HomeController extends Controller
         if(Auth::user()->role == 1){
             $reports = Report::paginate(5);
         }else{
-            $reports = Report::where('idUser',$user)->get();
+            $reports = Report::where('idUser',$user)->paginate(5);
         }
         
         return view('/reportmg/content',[
             'projects' => $Project,
             'users' => $users,
-            'reports' => $reports,
-            'active' =>'active'
+            'reports' => $reports
+            
             ]);
     }
-    
-    public function createProject(){
-        
-        $newProject = new Project;
-        if(Input::has('project') ){
-            $newProject->project = Input::get('project');
-            $newProject->description = Input::get('description');
-            $newProject->duration = Input::get('duration');
-            $newProject->other = Input::get('other');
-            $newProject->save();
-            return redirect('/report');
-        }
-        return "faild";
-        
-    }
-    public function CreateUser(){
-        $newUser = new User;
-        if(Input::has('email') && Input::has('password')){
-            $newUser->firstname = Input::get('firstname');
-            $newUser->lastname = Input::get('lastname');
-            $newUser->email = Input::get('email');
-            $newUser->role = Input::get('role');
-            $newUser->password = bcrypt(Input::get('password'));
+     public function storeUser(Request $request){
 
-            $newUser->save();
-            return redirect('report');
+        if($request->ajax()){
+            if($request->has('email') && $request->has('password')){
+                $user = new User;
+                $user['firstname'] = $request->get('firstname');
+                $user['lastname'] = $request->get('lastname');
+                $user['email'] = $request->get('email');
+                $user['role'] = $request->get('role');
+                $user['password'] = bcrypt($request->get('password'));
+                $user->save();
+                return response()->json(['status'=>'200',
+                                    'users' => $user]);
+            }
+             return response()->json(['status'=>'400','data' => 'not found']);
+            }
+            return "faild";
         }
-        return "faild";
+    public function storeProject(Request $request){
+        if($request->ajax()){
+            if($request->has('project') && $request->has('duration')){
+                $projects = new Project;
+                $projects['project'] = $request->get('project');
+                $projects['description'] = $request->get('description');
+                $projects['duration'] = $request->get('duration');
+                $projects['other'] = $request->get('other');
+                $projects->save();
+
+                return response()->json(['status'=>'200','datas' => $projects]);
+            }
+            return response()->json(['status' =>'400','data' => 'not found']);
+        }
+        return 'lost connection';
     }
+    
+    
+   
     public function createReport(){
         $newReport = new Report;
         if(Input::has('idUser') && Input::has('startTime') && Input::has('stopTime') && Input::has('task')){

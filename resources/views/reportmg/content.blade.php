@@ -32,7 +32,7 @@
 
                         <ul class="nav nav-pills nav-tabs nav-justified">
                             <li class=""><a data-toggle="tab" href="#new"><i class="fa fa-address-card-o" aria-hidden="true"></i> New</a></li>
-                            <li ><a data-toggle="tab" href="#view"><i class="fa fa-list-alt {!! $active !!}" aria-hidden="true"></i> View</a></li>
+                            <li ><a data-toggle="tab" href="#view"><i class="fa fa-list-alt " aria-hidden="true"></i> View</a></li>
                              @if (Auth::user()->role == 1) 
                             <li><a data-toggle="tab" href="#admin"><i class="fa fa-user-secret" aria-hidden="true"></i> Admin</a></li>
                             @endif

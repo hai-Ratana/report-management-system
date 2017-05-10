@@ -9,8 +9,8 @@
           <h4 class="modal-title">Create User</h4>
         </div>
         <div class="modal-body">
-          <form class="form-horizontal" action="{{ url('user') }}" method="post">
-             {{ csrf_field() }}
+          <form class="form-horizontal" id="frmUser"  >
+           
         <!-- Text input-->
         <div class="form-group">
           <label class="col-md-4 control-label" for="textinput">First Name:</label>  
@@ -57,13 +57,13 @@
             
           </div>
         </div>
-        <button id="save" type="sumit" name="save" class="btn btn-success">save</button>
+        
         </form>
          
         </div>
         <div class="modal-footer">
-          
-          <button id="button2id" name="button2id" class="btn btn-danger" data-dismiss="modal">reset</button>
+          <button id="saveUser" data-count="{!! $users->count() !!}"  class="btn btn-success" data-url="{{ url('create/user/ajax') }}">save</button>
+          <button id="" name="button2id" class="btn btn-danger" data-dismiss="modal">reset</button>
           
         </div>
       </div>

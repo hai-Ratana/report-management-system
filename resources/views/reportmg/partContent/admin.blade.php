@@ -31,9 +31,10 @@
             <th>other</th>
           </tr>
         </thead>
-        <tbody>
+        @if(!empty($users))
+        <tbody id="user-list" >
          
-          @if(!empty($users))
+          
             @foreach($users as $key => $user)
              <tr>
             <td>{!! ($key+1) !!}</td>
@@ -55,6 +56,7 @@
             </td>
             </tr>
             @endforeach
+            
           @endif
           
           
@@ -95,7 +97,7 @@
             <th>Act</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="project-list">
           <tr>
           @if(!empty($projects))
           @foreach($projects as $key => $project)
