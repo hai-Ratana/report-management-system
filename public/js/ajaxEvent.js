@@ -1,5 +1,12 @@
 $(document).ready(function(){
-		$.ajaxSetup({ headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')} });
+		 $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                cache:false
+            }
+        })
+        
+
     $('#saveUser').on('click',function(e){
          e.preventDefault();
         var index = $(this).data('count');
@@ -47,43 +54,41 @@ $(document).ready(function(){
     	});
     });
 
-    $('#saveProject').on('click',function(e){
-         e.preventDefault();
+   $('#storeProject').on('click',function(){
+    
         var url = $(this).data('url');
-        var data = {
-                    project: $('#project').val(),
-                    description: $('#description').val(),
-                    duration:$('#duration').val(),
-                    other:$('#other').val()
-                };
-            
 
+        var Data ={
+                 nameProject : $('#nameProject').val(),
+                 description : $('#description').val(),
+                 duration : $('#duration').val(),
+                 other : $('#other').val()
+                };
+       
         $.ajax({
-            url: url,
+            url:url,
             type:'POST',
-            data : data,
+            data:Data,
             dataType:'JSON',
             success:function(response){
-                
-                var tb = "";
-                
-                    tb += '<tr >';
-                   tb += '<td> OOP' + response.datas.id + '</td>';
-                    tb += '<td>' + response.datas.project + '</td>';
-                    tb += '<td>' + response.datas.description + '</td>';
-                    tb += '<td>' + response.datas.duration + '</td>';
-                    tb += '<td>' + response.datas.other + '</td>';
-                    tb += '<td>';
-                    tb += '<button class="btn btn-primary">Edit</button>';
-                    tb += ' <button class="btn btn-danger">Delete</button>';
-                    tb += '</td>';
-                    tb += '</tr>';
-              
+                var project = "";
+                    project += '<tr>';
+                    project +=  '<td>OOP'+ response.datas.id +'</td>';
+                    project +=  '<td>'+ response.datas.nameProject +'</td>';
+                    project +=  '<td>'+ response.datas.description +'</td>';
+                    project +=  '<td>'+ response.datas.duration +'</td>';
+                    project +=  '<td>'+ response.datas.other +'</td>';
+                    project +=  '<td>';
+                    project +=  '<button class="btn btn-primary">Edit</button>';
+                    project +=  ' <button class="btn btn-danger">Delete</button>';
+                    project +=  '</td>';
+                    project += '</tr>';
                 $('#frmProject').trigger("reset");
-                $("#project-list").append(tb);
-            $('#projecForm').modal('hide');
+                $("#project-list").append(project);
+                $('#projecForm').modal('hide');
             }
         });
-    })
+
+   });
 
 });

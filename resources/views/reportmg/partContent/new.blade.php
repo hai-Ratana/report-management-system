@@ -22,7 +22,7 @@
         <select id="project" name="project" class="  form-control">
 
           @foreach($projects as $key => $project)
-          <option  value="{!! $project->project !!}"  >{!! $project->project !!}</option>
+          <option  value="{!! $project->nameProject !!}"  >{!! $project->nameProject !!}</option>
           @endforeach
           
         </select>

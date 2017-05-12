@@ -15,9 +15,11 @@
     <h2>User list:</h2>
       <div class="col-md-4 pull-right">
         <button class=" pull-right btn btn-info" data-toggle="modal" data-target="#userModal"><i class="fa fa-plus-circle" aria-hidden="true"></i> User</button>
+        
       
       </div>
       
+    @include('reportmg.partContent.adduser')
     <div class="col-md-12 table-responsive">
         <table class="table table-bordered table-striped">
         <thead>
@@ -62,10 +64,7 @@
           
         </tbody>
       </table>
-
-      
-    </div>
-    <div class="col-md-offset-5 ">
+       <div class="col-md-offset-5 ">
       <ul class="pagination">
         <li><a href="#">1</a></li>
         <li class="active"><a href="#">2</a></li>
@@ -74,6 +73,9 @@
         <li><a href="#">5</a></li>
       </ul>
     </div>
+      
+    </div>
+   
      
 
     </div>
@@ -84,7 +86,7 @@
         <button class=" pull-right btn btn-info" data-toggle="modal" data-target="#projecForm"><i class="fa fa-plus-circle" aria-hidden="true"></i> Project</button>
       
       </div>
-      
+      @include('reportmg.partContent.addproject')
     <div class=" col-md-12 table-responsive">
       <table class="table table-bordered table-striped">
         <thead>
@@ -100,12 +102,12 @@
         <tbody id="project-list">
           <tr>
           @if(!empty($projects))
-          @foreach($projects as $key => $project)
-            <td>00P{!! $project->id !!}</td>
-            <td>{!! $project->project !!}</td>
-            <td>{!! $project->description !!}</td>
-            <td>{!! $project->duration !!}</td>
-            <td>{!! $project->other !!}</td>
+          @foreach($projects as $key => $pro)
+            <td>00P{!! $pro->id !!}</td>
+            <td>{!! $pro->nameProject !!}</td>
+            <td>{!! $pro->description !!}</td>
+            <td>{!! $pro->duration !!}</td>
+            <td>{!! $pro->other !!}</td>
             <td>
               <button class="btn btn-primary">Edit</button>
               <button class="btn btn-danger">Delete</button>
@@ -116,18 +118,9 @@
         </tbody>
       </table>
     </div>
-      <div class="col-md-offset-5 ">
-      <ul class="pagination">
-        <li><a href="#">1</a></li>
-        <li class="active"><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-      </ul>
-    </div>
+    
     </div>
     
-    @include('reportmg.partContent.adduser')
-    @include('reportmg.partContent.addproject')
+    
   </div>
 </div>

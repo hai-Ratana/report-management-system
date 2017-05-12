@@ -27,9 +27,9 @@ Route::get('report','HomeController@user');
 Route::get('test','HomeController@test');
 
 
-Route::post('project','HomeController@createProject');
+
 Route::post('create/user/ajax','HomeController@storeUser');
-Route::post('create/project','HomeController@storeProject');
+Route::post('create/project/ajax','HomeController@storeProjects');
 
 
 Route::post('user','HomeController@createUser');

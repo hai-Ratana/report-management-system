@@ -10,12 +10,12 @@
         </div>
         <div class="modal-body">
           <form class="form-horizontal" id="frmProject" >
-             
+             {{ csrf_field() }}
                 <!-- Text input-->
                 <div class="form-group">
                   <label class="col-md-3 control-label" for="textinput">Project:</label>  
                   <div class="col-md-8">
-                  <input id="project" name="project" type="text" placeholder="input project name" class="form-control input-md" required="">
+                  <input id="nameProject" name="nameProject" type="text" placeholder="input project name" class="form-control input-md" required="">
                     
                   </div>
                 </div>
@@ -49,7 +49,7 @@
          
       </div>
         <div class="modal-footer">
-           <button id="saveProject"  class="btn btn-success" data-url="{{ url('create/project') }}">save</button>
+           <button id="storeProject" class="btn btn-success " data-url="{{ url('create/project/ajax') }}"  >save</button>
           <button id="button2id" name="button2id" class="btn btn-danger" data-dismiss="modal">reset</button>
           
         </div>

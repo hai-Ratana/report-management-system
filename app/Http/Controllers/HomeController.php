@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Auth;
-use App\Model\Project;
+use App\Model\ProjectTable;
 use App\Model\Report;
 
 use App\User;
@@ -29,7 +29,7 @@ class HomeController extends Controller
     
     public function user(){
          $user = Auth::user()->id;
-        $Project = Project::all();
+        $Project = ProjectTable::all();
         $users = User::all();
         if(Auth::user()->role == 1){
             $reports = Report::paginate(5);
@@ -62,25 +62,25 @@ class HomeController extends Controller
             }
             return "faild";
         }
-    public function storeProject(Request $request){
-        if($request->ajax()){
-            if($request->has('project') && $request->has('duration')){
-                $projects = new Project;
-                $projects['project'] = $request->get('project');
-                $projects['description'] = $request->get('description');
-                $projects['duration'] = $request->get('duration');
-                $projects['other'] = $request->get('other');
-                $projects->save();
-
-                return response()->json(['status'=>'200','datas' => $projects]);
+        public function storeProjects(Request $request){
+             $newProject = new ProjectTable;
+            if ($request->ajax()){
+                if($request->has('nameProject') && $request->has('duration')){
+                   
+                    $newProject->nameProject = $request->get('nameProject');
+                    $newProject->description = $request->get('description');
+                    $newProject->duration = $request->get('duration');
+                    $newProject->other = $request->get('other');
+                       
+                    $newProject->save();
+                    return response()->json(['status' => '200','datas' => $newProject]);
+                }
+                return response()->json(['status' => '400','datas' => 'not found']);
             }
-            return response()->json(['status' =>'400','data' => 'not found']);
+            return "lost connection";
         }
-        return 'lost connection';
-    }
-    
-    
    
+    
     public function createReport(){
         $newReport = new Report;
         if(Input::has('idUser') && Input::has('startTime') && Input::has('stopTime') && Input::has('task')){

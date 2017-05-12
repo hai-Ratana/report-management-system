@@ -28,7 +28,7 @@ class ReporterTable extends Migration
             $table->string('impression',null);
             
             
-            $table->timestamps();
+            
         });
     }
 
