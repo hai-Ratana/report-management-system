@@ -81,7 +81,7 @@
    </div>
      <div class="text-center">
     {!! $reports->links() !!}
-</div>
+      </div>
     @endif
   </div>
    

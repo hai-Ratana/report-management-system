@@ -30,7 +30,7 @@ $(document).ready(function(){
                 var product = "";
                 
                     product += '<tr >';
-                    product += '<td>' + (index+1) + '</td>';
+                   
                     product += '<td>' + response.users.firstname + '</td>';
                     product += '<td>' + response.users.lastname + '</td>';
                     product += '<td>' + response.users.email + '</td>';
@@ -50,8 +50,11 @@ $(document).ready(function(){
                 $('#frmUser').trigger("reset");
                 $("#user-list").append(product);
             $('#userModal').modal('hide');
+
     		}
+
     	});
+
     });
 
    $('#storeProject').on('click',function(){
@@ -90,5 +93,20 @@ $(document).ready(function(){
         });
 
    });
-
+   $('.edit').on('click',function(){
+        var id = $(this).data('id');
+        var url = $(this).data('url');
+       $.ajax({
+            url:url+'/'+id,
+            type:'GET',
+            dataType:'JSON',
+            success:function(response){
+              $('#nameProject').val(response.project.nameProject);
+              $('#description').val(response.project.description);
+              $('#duration').val(response.project.duration);
+              $('#other').val(response.project.other);
+               $('#projecForm').modal('show');  
+            }
+       })
+   });
 });

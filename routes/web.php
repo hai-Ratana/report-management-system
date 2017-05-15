@@ -30,6 +30,7 @@ Route::get('test','HomeController@test');
 
 Route::post('create/user/ajax','HomeController@storeUser');
 Route::post('create/project/ajax','HomeController@storeProjects');
+Route::get('project/edit/{id}','HomeController@editProject');
 
 
 Route::post('user','HomeController@createUser');

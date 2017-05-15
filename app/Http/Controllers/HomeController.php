@@ -30,7 +30,7 @@ class HomeController extends Controller
     public function user(){
          $user = Auth::user()->id;
         $Project = ProjectTable::all();
-        $users = User::all();
+        $users = User::paginate(5);
         if(Auth::user()->role == 1){
             $reports = Report::paginate(5);
         }else{
@@ -79,7 +79,14 @@ class HomeController extends Controller
             }
             return "lost connection";
         }
-   
+        public function editProject($id,Request $request){
+            if($request->ajax()){
+                $edit = ProjectTable::find($id);
+                return response()->json(['project' => $edit]);
+            }
+            return "fail";
+
+        }
     
     public function createReport(){
         $newReport = new Report;
