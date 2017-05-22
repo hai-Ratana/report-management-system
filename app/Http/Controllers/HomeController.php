@@ -27,12 +27,17 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function user(){
+    public function user(Request $request){
          $user = Auth::user()->id;
         $Project = ProjectTable::all();
         $users = User::paginate(5);
         if(Auth::user()->role == 1){
+            if($request->ajax()){
+                $reports = Report::whereYear('created_at',$request->get('year'))->whereMonth('created_at',$request->get('month'))->get();
+                return response()->json(['report' => $reports]);
+            }
             $reports = Report::paginate(5);
+            
         }else{
             $reports = Report::where('idUser',$user)->paginate(5);
         }
@@ -62,6 +67,8 @@ class HomeController extends Controller
             }
             return "faild";
         }
+       
+         
         public function storeProjects(Request $request){
              $newProject = new ProjectTable;
             if ($request->ajax()){
@@ -87,6 +94,32 @@ class HomeController extends Controller
             return "fail";
 
         }
+        public function changeProject($id,Request $request){
+            if($request->ajax()){
+                $updateProject = ProjectTable::find($id);
+                if(!empty($updateProject)){
+                    $updateProject->nameProject = $request->get('nameProject');
+                    $updateProject->description = $request->get('description');
+                    $updateProject->duration = $request->get('duration');
+                    $updateProject->other = $request->get('other');
+                       
+                    $updateProject->save();
+                    
+                    return response()->json(['status'=> 'updated','data'=> $updateProject]);
+                }
+                     return response()->json(['status'=> '400','data'=> 'not found id']);
+            }
+            return "faild";
+        }
+        public function removeProject($id,Request $request){
+           
+            if($request->ajax()){
+                $project = ProjectTable::find($id)->delete();
+                 
+                return response()->json(['status' => 'deleted']);
+            }
+            return "faild";
+        }
     
     public function createReport(){
         $newReport = new Report;
@@ -110,10 +143,7 @@ class HomeController extends Controller
     }
     public function test(){
        
-        $report = User::where('idUser',$user);
-       foreach ($report as $key => $value) {
-           echo $value->id;
-       }
-       
+      $reports = Report::whereMonth('created_at','04')->get();
+       return $reports;
     }
 }

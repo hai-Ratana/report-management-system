@@ -1,6 +1,6 @@
  <div class="row">
    <ul class="nav nav-tabs ">
-    <li class="active"><a data-toggle="tab" href="#week">week</a></li>
+    <li class="active"><a data-toggle="tab" href="#week">Week</a></li>
     <li><a data-toggle="tab" href="#year">Year</a></li>
     
 

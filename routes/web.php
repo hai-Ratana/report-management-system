@@ -24,6 +24,8 @@ Route::get('/', function(){
 	return redirect('report');
 });
 Route::get('report','HomeController@user');
+Route::get('report/date','HomeController@test');
+Route::get('filter/ajax','HomeController@user');
 Route::get('test','HomeController@test');
 
 
@@ -31,6 +33,10 @@ Route::get('test','HomeController@test');
 Route::post('create/user/ajax','HomeController@storeUser');
 Route::post('create/project/ajax','HomeController@storeProjects');
 Route::get('project/edit/{id}','HomeController@editProject');
+Route::post('edit/project/ajax/{id}','HomeController@changeProject');
+Route::get('project/delete/ajax/{id}','HomeController@removeProject');
+
+
 
 
 Route::post('user','HomeController@createUser');

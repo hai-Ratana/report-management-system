@@ -44,12 +44,17 @@
                     <textarea class="form-control" id="other" name="other"></textarea>
                   </div>
                 </div>
+                <input type="hidden" id="idProject" name="id" value="">
                
           </form>
+          <div class="warningmsg ">
+            Are you sure want to delete <strong id="msgid" style="color: red;"></strong> Project ?
+          </div>
          
       </div>
         <div class="modal-footer">
-           <button id="storeProject" class="btn btn-success " data-url="{{ url('create/project/ajax') }}"  >save</button>
+           
+           <button id="" class="btn btn-success action" data-add="{{ url('create/project/ajax') }}" data-url="{{ url('project/delete/ajax') }}" data-edit-url="{{ url('edit/project/ajax')}}"><span id="footer-btnsubmit"></span></button>
           <button id="button2id" name="button2id" class="btn btn-danger" data-dismiss="modal">reset</button>
           
         </div>

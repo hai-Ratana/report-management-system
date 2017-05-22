@@ -34,7 +34,7 @@
       
       
     </div>
-
+  
     @endif
 
  
@@ -135,10 +135,10 @@
         <div class="panel panel-teal">
           <div class="panel-heading dark-overlay"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg>Calendar</div>
           <div class="panel-body">
-            <div id="calendar"  data-link-field="input2" data-link-format="dd-mm-yyyy"></div>
+            <div id="calendar"  data-link-field="toDay" data-link-format="dd-mm-yyyy"></div>
           </div>
         </div>
-        <input  id="input2" value="" class="form-control input-md" name="">
+        <input  id="toDay" value="" class="form-control input-md" name="">
    
 </div>
 <!-- </col-lg-4> -->

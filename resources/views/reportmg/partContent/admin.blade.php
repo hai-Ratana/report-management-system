@@ -77,14 +77,14 @@
        <br>
     <h2>User list:</h2>
       <div class="col-md-4 pull-right">
-        <button class=" pull-right btn btn-info" data-toggle="modal" data-target="#projecForm"><i class="fa fa-plus-circle" aria-hidden="true"></i> Project</button>
+        <button id="projectModal" class=" pull-right btn btn-info" data-toggle="modal" data-target="#projecForm"><i class="fa fa-plus-circle" aria-hidden="true"></i> Project</button>
       
       </div>
       @include('reportmg.partContent.addproject')
     <div class=" col-md-12 table-responsive">
-      <table class="table table-bordered table-striped">
+      <table id="table-project" class="table table-bordered table-striped">
         <thead>
-          <tr>
+          <tr >
             <th>Project ID</th>
             <th>Project</th>
             <th>Description</th>
@@ -93,10 +93,11 @@
             <th>Act</th>
           </tr>
         </thead>
-        <tbody id="project-list">
-          <tr>
+        <tbody id="project-list" class="tbody-project">
+          
           @if(!empty($projects))
           @foreach($projects as $key => $pro)
+          <tr class="project{{ $pro->id }}" >
             <td>00P{!! $pro->id !!}</td>
             <td>{!! $pro->nameProject !!}</td>
             <td>{!! $pro->description !!}</td>
@@ -104,8 +105,17 @@
             <td>{!! $pro->other !!}</td>
             <td>
               
-              <button class="btn btn-primary edit " data-id="{{ $pro->id }}" data-url="{{ url('project/edit')}}">Edit</button>
-              <button class="btn btn-danger">Delete</button>
+              <button class="btn btn-primary edit " 
+              data-id="{{ $pro->id }}" 
+              
+              data-name="{{ $pro->nameProject}}"
+              data-desc="{{ $pro->description}}"
+              data-duration="{{ $pro->duration}}"
+              data-other="{{ $pro->other }}"
+              >Edit</button>
+              <button class="btn btn-danger removeProject" 
+              data-name="{{ $pro->nameProject}}" 
+              data-id="{{ $pro->id }}" >Delete</button>
             </td>
           </tr>
           @endforeach

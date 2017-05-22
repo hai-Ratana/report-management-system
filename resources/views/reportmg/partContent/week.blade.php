@@ -1,21 +1,15 @@
 <div class="row">
    <div class="col-md-6 pull-right">
-          <label class="col-md-2 control-label " for="selectbasic">Month:</label>
-          <div class="col-md-4  ">
-          <select  id="selectbasic" name="selectbasic" class=" form-control">
-            <option value="1">Option one</option>
-            <option value="2">Option two</option>
-          </select>
-          </div>
-      
-      
-          <label class="col-md-2 control-label " for="selectbasic">Year:</label>
+          <label class="col-md-2 col-md-offset-4 control-label " for="selectbasic">Month:</label>
           <div class="col-md-4 ">
-          <select  id="selectbasic" name="selectbasic" class=" form-control">
-            <option value="1">Option one</option>
-            <option value="2">Option two</option>
-          </select>
+            <input type="text" id="month" name="month" class="form-control MonthInput">
           </div>
+          <div class="col-md-2 ">
+            <button data-url="{{ url('filter/ajax')}}" class="filterReport btn">
+              <span ><i class="glyphicon glyphicon-th"></i></span>
+            </button>
+          </div>
+
       </div>
 </div>
      
@@ -44,12 +38,12 @@
             @endif
           </tr>
         </thead>
-        <tbody>
+        <tbody id="report-list">
           @if(!empty($reports))
             @foreach($reports as $key => $report)
             <tr>
               <td>{!! ($key+1) !!}</td>
-              <td>{!! date_format($report->created_at,"Y/m/d") !!}</td>
+              <td>{!! date_format($report->created_at,"D/M/Y") !!}</td>
               <td>OOP{!! $report->projectId !!}</td>
               <td>{!! $report->project !!}</td>
               <td>{!! $report->startTime !!}</td>

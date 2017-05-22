@@ -18,14 +18,18 @@
        todayBtn:  1,
        startView: 2,
         minView: 2,
+    });
 
-		});
-    $('.timeInput').datetimepicker({
-       weekStart: 1,
+    $('.MonthInput').datetimepicker({
+        format:'mm/yyyy',
         autoclose: 1,
-        startView:1 ,    
+        startView:3 ,
+         minView: 4,   
         
         showMeridian: 1
+    });
+    $('timedatepicker').on("dp.change", function(e){
+        alert('Hey');
     });
     
 		
