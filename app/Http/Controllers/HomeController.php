@@ -67,6 +67,42 @@ class HomeController extends Controller
             }
             return "faild";
         }
+        public function editUser(Request $request ){
+            if($request->ajax()){
+                $user = User::find($request->id);
+                if(!empty($user)){
+                    $user->firstname = $request->get('firstname');
+                    $user->lastname = $request->get('lastname');
+                    $user->email = $request->get('email');
+                    $user->role = $request->get('role');
+                    if(empty($request->get('password'))){
+                    $user->save($request->except('password'));
+                    }else{
+                    $user->password = bcrypt($request->get('password'));
+                    $user->save();
+                              
+                    }
+                    
+                    return response()->json(['status' => "200",'users' => $user]);
+
+                }
+                return response()->json(['status' => "400",'users' => 'data not found']);
+
+            }
+            return 'no connection';
+        }
+        public function removeUser(Request $request){
+            if($request->ajax()){
+                $delete = User::find($request->get('id'));
+                if(!empty($delete)){
+                  $delete->delete();
+                  return response()->json(['status'=>'200']);  
+                }
+                return response()->json(['status'=>'400']);
+            }
+
+            return "no connection";
+        }
        
          
         public function storeProjects(Request $request){
@@ -141,9 +177,22 @@ class HomeController extends Controller
         }
         return "faild";
     }
+    public function filterReport(Request $request){
+        if($request->ajax()){
+            
+        $report = Report::whereDate('created_at','=',$request->get('day'))->get();
+            if(!empty($report)){
+             return response()->json(['report' => $report]);   
+            }else{
+             return response()->json(['report' => 'not found']);   
+            }
+            
+        }
+        return "no connection";
+    }
     public function test(){
        
-      $reports = Report::whereMonth('created_at','04')->get();
-       return $reports;
+     $report = Report::whereDate('created_at','=','2017-05-12')->get();
+     return $report;
     }
 }

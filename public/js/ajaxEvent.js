@@ -6,10 +6,21 @@ $(document).ready(function(){
               }
           });
           
+// Tab user
+      $(document).on('click','#users',function(){
+          $('#frmUser').trigger("reset");
+          $('#title-user').text('Create User');
+          $('#frmUser').show();
+          $('.warningmsg-user').hide();
+          $('.action-user').addClass('storeUser');
+          $('.action-user').removeClass('changeUser');
+          $('.action-user').removeClass('deleteUser');
+          $('#footer-btnsubmit-user').text("Insert");
+      });
 
-      $('#saveUser').on('click',function(e){
-           e.preventDefault();
-        var index = $(this).data('count');
+      $('.footer-users').on('click','.storeUser',function(){
+          
+        
         var url = $(this).data('url');
         var data = {
               firstname : $('#firstname').val(),
@@ -26,29 +37,9 @@ $(document).ready(function(){
           data : data,
           dataType:'JSON',
           success:function(response){
-            
-                  var product = "";
-                  
-                      product += '<tr >';
-                     
-                      product += '<td>' + response.users.firstname + '</td>';
-                      product += '<td>' + response.users.lastname + '</td>';
-                      product += '<td>' + response.users.email + '</td>';
-                      if(response.users.role == 1){
-                           product += '<td> Adim </td>';
-                      }else{
-                          product += '<td> User </td>';
-                      }
-                      
-                      product += '<td>' + '.....' + '</td>';
-                      product += '<td>';
-                      product += '<button class="btn btn-primary">Edit</button>';
-                      product += ' <button class="btn btn-danger">Delete</button>';
-                      product += '</td>';
-                      product += '</tr>';
-                
-                  $('#frmUser').trigger("reset");
-                  $("#user-list").append(product);
+                console.log(response);
+              $('#frmUser').trigger("reset");
+               $("#user-list").append(getRowUser(response.users));
               $('#userModal').modal('hide');
 
           }
@@ -56,19 +47,109 @@ $(document).ready(function(){
         });
 
       });
+  $(document).on('click','.edit-user',function(){
+      $('#title-user').text('Edit User');
+      $('#firstname').val($(this).data('fn') );
+      $('#lastname').val($(this).data('ln'));
+      $('#email').val($(this).data('email'));
+      $('#role').val($(this).data('role'));
+      $('#userId').val($(this).data('userid'));
+      $('#frmUser').show();
+      $('.warningmsg-user').hide();
+      $('.action-user').addClass('changeUser');
+      $('.action-user').removeClass('storeUser');
+      $('.action-user').removeClass('deleteUser');
+      $('#footer-btnsubmit-user').text("Edit");
+      $('#userModal').modal('show');      
+});
+  $('.footer-users').on('click','.changeUser',function(){
+      var url = $(this).data('edit');
+      var data = {
+              id : $('#userId').val(),
+              firstname : $('#firstname').val(),
+              lastname : $('#lastname').val(),
+              email : $('#email').val(),
+              role : $('#role').val(),
+              password : $('#password').val()};
+      $.ajax({
+          url:url,
+          type:"POST",
+          data:data,
+          dataType:'JSON',
+          success:function(response){
+              var row = getRowUser(response.users);
+              $('.user'+response.users.id).replaceWith(row);
+               $('#userModal').modal('hide');
+          }
+      });
+  });
+  $(document).on('click','.remove-user',function(){
+      $('#title-user').text('Delete User');
+      $('#userId').val($(this).data('userid'));
+      $('#frmUser').hide();
+      $('#msgid-user').text($(this).data('fn')+' '+$(this).data('ln'));
+      $('.warningmsg-user').show();
+      
+      $('.action-user').addClass('deleteUser');
+      $('.action-user').removeClass('changeUser');
+      $('.action-user').removeClass('storeUser');
+      $('#footer-btnsubmit-user').text("Delete");
+      $('#userModal').modal('show');           
+  });
+  $('.footer-users').on('click','.deleteUser',function(){
+      var url= $(this).data('delete');
+      var id = $('#userId').val();
+      
+      
+      $.ajax({
+          url:url,
+          type:'GET',
+          data: id,
+          dataType:'JSON',
+          success:function(response){
+            $('.user'+id).remove();
+            $('#userModal').modal('hide');  
+          }
+      });
+  });
+      function getRowUser(data){
+
+      var userRow = "";
+          userRow += '<tr class="user'+ data.id +'">';
+          userRow += '<td>' + data.firstname + '</td>';
+          userRow += '<td>' + data.lastname + '</td>';
+          userRow += '<td>' + data.email + '</td>';
+          if(data.role == 1){
+               userRow += '<td> Adim </td>';
+          }else{
+              userRow += '<td> User </td>';
+          }
+          userRow += '<td>' + '.....' + '</td>';
+          userRow += '<td>';
+          userRow += '<button class="btn btn-primary edit-user" data-userid="'+ data.id +'"';
+          userRow += ' data-fn="'+ data.firstname +'" data-ln="'+ data.lastname +'"';
+          userRow += ' data-email="'+ data.email +'" data-role="'+ data.row +'">Edit</button>';
+          userRow += ' <button class="btn btn-danger removeUser" ';
+          userRow += 'data-userid="'+data.id+'" data-fn="'+data.firstname+'" data-ln="'+data.lastname+'">Delete</button>';
+          userRow += '</td>';
+          userRow += '</tr>';
+        return userRow;
+      }
+
+// Tab Project
 
       $(document).on('click','#projectModal',function(){
           $('#frmProject').trigger("reset");
           $('.warningmsg').hide();
-          $('.form-horizontal').show();
-          $('.modal-title').text('Create project');
+          $('#frmProject').show();
+          $('#title-project').text('Create project');
           $('.action').addClass('storeProject');
           $('.action').removeClass('changeProject');
           $('.action').removeClass('deleteProject');
           $('#footer-btnsubmit').text("Insert");
       });
 
-     $('.modal-footer').on('click','.storeProject',function(){
+     $('.footer-project').on('click','.storeProject',function(){
       
           var url = $(this).data('add');
 
@@ -96,8 +177,8 @@ $(document).ready(function(){
      });
      $(document).on('click','.edit',function(){
                   $('.warningmsg').hide();
-                  $('.form-horizontal').show();
-                  $('.modal-title').text('Edit project');
+                  $('#frmProject').show();
+                  $('#title-project').text('Edit project');
                   $('.action').addClass('changeProject');
                   $('.action').removeClass('deleteProject');
                   $('.action').removeClass('storeProject');
@@ -112,8 +193,8 @@ $(document).ready(function(){
      $(document).on('click','.removeProject',function(){
           $('.warningmsg').show();
           $('#msgid').text($(this).data('name'));
-          $('.form-horizontal').hide();
-           $('.modal-title').text('Delete project');
+          $('#frmProject').hide();
+           $('#title-project').text('Delete project');
 
            $('#idProject').val($(this).data('id'));
             $('.action').addClass('deleteProject');
@@ -127,7 +208,7 @@ $(document).ready(function(){
           
      //      $('#storeProject').removeClass('hidden');
      // });
-     $('.modal-footer').on('click','.changeProject',function(){
+     $('.footer-project').on('click','.changeProject',function(){
           var url = $(this).data('edit-url');
           var id = $('#idProject').val();
           var data = {
@@ -149,7 +230,7 @@ $(document).ready(function(){
               }
           });
      });
-     $('.modal-footer').on('click','.deleteProject',function(){
+     $('.footer-project').on('click','.deleteProject',function(){
 
             var id = $('#idProject').val();
             var url = $(this).data('url');
@@ -221,9 +302,40 @@ $(document).ready(function(){
       });
   });
 
-  $('#clickDay').click(function(){
-    alert('hello');
+  // event on calendar
+  $('.timedatepicker').on('click','.active',function(){
+      
+        var day = $('#toDay').val();
+        var url = $('#toDay').data('url');
+        // alert(url);
+        $.ajax({
+          url:url,
+          type:'POST',
+          data:{day},
+          dataType:'JSON',
+          success:function(response){
+            console.log(response.report);
+             $('#projectID').val('OOP'+response.report.id);
+             $('#project').val(response.report.project);
+             $('#breakTime').val(response.report.breakTime);
+             $('#startTime').val(response.report.startTime);
+             $('#endTime').val(response.report.endTime);
+             $('#totalTime').val(response.report.totalTime);
+             $('#task').val(response.report.task);
+             $('#action').val(response.report.action);
+             $('#knowledge').val(response.report.knowledge);
+             $('#impression').val(response.report.impression);
+          }
+        });
+ 
+      
   });
+  
+  //pagination 
+  // $(document).on('click','.pagination a',function(e)){
+  //   e.preventDefault();
+  //   console.log($(this).attr('href').split('page=')[0]);
+  // });
 
 });
 		 

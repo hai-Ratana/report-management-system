@@ -14,7 +14,7 @@
     <br>
     <h2>User list:</h2>
       <div class="col-md-4 pull-right">
-        <button class=" pull-right btn btn-info" data-toggle="modal" data-target="#userModal"><i class="fa fa-plus-circle" aria-hidden="true"></i> User</button>
+        <button class=" pull-right btn btn-info" data-toggle="modal" data-target="#userModal" id="users"><i class="fa fa-plus-circle" aria-hidden="true"></i> User</button>
         
       
       </div>
@@ -33,29 +33,28 @@
             <th>other</th>
           </tr>
         </thead>
-        @if(!empty($users))
+       
         <tbody id="user-list" >
          
-          
+           @if(!empty($users))
             @foreach($users as $key => $user)
-             <tr>
-           
-            <td>{!! $user->firstname !!}</td>
-            <td>{!! $user->lastname !!}</td>
-            <td>{!! $user->email !!}</td>
-            <td>
-            @if($user->role ==1)
-                admin
-              @else
-                User
-            @endif
-            </td>
-             <td>......</td>
-            <td>
+             <tr class="user{{ $user->id }}">
+              <td>{!! $user->firstname !!}</td>
+              <td>{!! $user->lastname !!}</td>
+              <td>{!! $user->email !!}</td>
+              <td>
+              @if($user->role ==1)
+                  admin
+                @else
+                  User
+              @endif
+              </td>
+               <td>......</td>
+              <td>
 
-              <button class="btn btn-primary">Edit</button>
-              <button class="btn btn-danger">Delete</button>
-            </td>
+                <button class="btn btn-primary edit-user" data-userid="{{ $user->id }}" data-fn="{{ $user->firstname }}" data-ln="{{ $user->lastname }}" data-email="{{ $user->email }}" data-role="{{ $user->role }}">Edit</button>
+                <button class="btn btn-danger remove-user" data-userid="{{ $user->id }}" data-fn="{{ $user->firstname }}" data-ln="{{ $user->lastname }}">Delete</button>
+              </td>
             </tr>
             @endforeach
             

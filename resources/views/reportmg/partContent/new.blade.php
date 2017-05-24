@@ -6,7 +6,7 @@
 
 <div class="col-lg-8">
     <!-- project ID -->
-    @if(!empty($projects))
+   
     <div class="form-group ">
       <label class="col-md-1 control-label" for="selectbasic">project ID</label>
         <div class="col-md-3">
@@ -35,14 +35,14 @@
       
     </div>
   
-    @endif
+  
 
  
     <!-- Start Time-->
     <div class="form-group">
       <label class=" col-md-1 control-label" for="textinput">Start Time</label>
       <div class="col-md-3">
-        <input name="startTime" placeholder="hh:mn" class="form-control date input-md "  data-date="" data-date-format=" HH:ii p" required="" type="text">
+        <input id="startTime" name="startTime" placeholder="hh:mn" class="form-control date input-md "  data-date="" data-date-format=" HH:ii p" required="" type="text">
       </div>  
        <label class="col-md-1 control-label" for="textinput">Stop Time</label> 
       <div class="col-md-3">
@@ -71,7 +71,7 @@
       </div>
       <div class="row">
         <div class="col-md-10 col-md-offset-2">
-        <textarea class="form-control" id="tak" rows="5"  name="task"></textarea>
+        <textarea class="form-control" id="task" rows="5"  name="task"></textarea>
         </div>
       </div>
       
@@ -135,11 +135,11 @@
         <div class="panel panel-teal">
           <div class="panel-heading dark-overlay"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg>Calendar</div>
           <div class="panel-body">
-            <div id="calendar"  data-link-field="toDay" data-link-format="dd-mm-yyyy"></div>
+            <div id="calendar"  data-link-field="toDay" data-link-format="yyyy-mm-dd"></div>
           </div>
         </div>
-        <input  id="toDay" value="" class="form-control input-md" name="">
-   
+        <input  id="toDay" value="" data-url="{{ url('report/day')}}" class="form-control input-md" >
+        <input type="" class="form-control input-md dobule" >
 </div>
 <!-- </col-lg-4> -->
 

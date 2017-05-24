@@ -6,10 +6,10 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Create Project</h4>
+          <h4 class="modal-title" id="title-project">Create Project</h4>
         </div>
         <div class="modal-body">
-          <form class="form-horizontal" id="frmProject" >
+          <form class="form-horizontal " id="frmProject" >
              {{ csrf_field() }}
                 <!-- Text input-->
                 <div class="form-group">
@@ -52,8 +52,8 @@
           </div>
          
       </div>
-        <div class="modal-footer">
-           
+        <div class="modal-footer footer-project">
+          
            <button id="" class="btn btn-success action" data-add="{{ url('create/project/ajax') }}" data-url="{{ url('project/delete/ajax') }}" data-edit-url="{{ url('edit/project/ajax')}}"><span id="footer-btnsubmit"></span></button>
           <button id="button2id" name="button2id" class="btn btn-danger" data-dismiss="modal">reset</button>
           
