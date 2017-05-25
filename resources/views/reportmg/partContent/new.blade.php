@@ -6,13 +6,14 @@
 
 <div class="col-lg-8">
     <!-- project ID -->
-   
+
     <div class="form-group ">
       <label class="col-md-1 control-label" for="selectbasic">project ID</label>
         <div class="col-md-3">
         <select  id="projectID" name="projectId" class=" form-control">
+          @if(isset($edit)) <option  value="{{!! $edit->id !!}}" selected=""></option>@endif
           @foreach($projects as $key => $projectID)
-          <option value="{!! $projectID->id !!}" class="selecteVal" data-index="{!! $key !!}">00P{!! $projectID->id !!}</option>
+          <option   value="{!! $projectID->id !!}" class="selecteVal" data-index="{!! $key !!}">00P{!! $projectID->id !!}</option>
           @endforeach
         </select>
         </div>
@@ -24,39 +25,39 @@
           @foreach($projects as $key => $project)
           <option  value="{!! $project->nameProject !!}"  >{!! $project->nameProject !!}</option>
           @endforeach
-          
+
         </select>
       </div>
-      <label class="col-md-1 control-label" for="textinput">Break Time</label>  
+      <label class="col-md-1 control-label" for="textinput">Break Time</label>
       <div class="col-md-3">
          <input id="breakTime" name="breakTime" placeholder="hh:mn" class="form-control input-md "  required="" type="text">
       </div>
-      
-      
-    </div>
-  
-  
 
- 
+
+    </div>
+
+
+
+
     <!-- Start Time-->
     <div class="form-group">
       <label class=" col-md-1 control-label" for="textinput">Start Time</label>
       <div class="col-md-3">
         <input id="startTime" name="startTime" placeholder="hh:mn" class="form-control date input-md "  data-date="" data-date-format=" HH:ii p" required="" type="text">
-      </div>  
-       <label class="col-md-1 control-label" for="textinput">Stop Time</label> 
+      </div>
+       <label class="col-md-1 control-label" for="textinput">Stop Time</label>
       <div class="col-md-3">
         <input id="endTime" name="stopTime" placeholder="hh:mn" class="form-control date input-md "
         data-date="" data-date-format=" HH:ii p"  required="" type="text">
-      </div>  
-      <label class="col-md-1 control-label" for="textinput">Total Time</label>  
+      </div>
+      <label class="col-md-1 control-label" for="textinput">Total Time</label>
       <div class="col-md-3">
       <input id="totalTime" name="totalTime" placeholder="Total Time" class=" form-control input-md " required="" readonly type="text">
-       </div> 
+       </div>
 
     </div>
 
-    
+
 
 
   <!-- Task & Action -->
@@ -66,7 +67,7 @@
         <div class="col-md-4">
           <label class="control-label " for="textarea">Task:</label>
         </div>
-      
+
       <div class="col-md-9"></div>
       </div>
       <div class="row">
@@ -74,7 +75,7 @@
         <textarea class="form-control" id="task" rows="5"  name="task"></textarea>
         </div>
       </div>
-      
+
     </div>
 
     <div class="col-md-6">
@@ -92,8 +93,8 @@
     </div>
 
   </div>
-    
-    
+
+
 
   <!-- knowledge & Impression -->
     <div class="form-group">
@@ -102,7 +103,7 @@
         <div class="col-md-4">
           <label class="control-label " for="textarea">Knowledge:</label>
         </div>
-      
+
       <div class="col-md-9"></div>
       </div>
       <div class="row">
@@ -110,7 +111,7 @@
         <textarea class="form-control" rows="5" id="knowledge" name="knowledge"></textarea>
         </div>
       </div>
-      
+
     </div>
 
     <div class="col-md-6">
@@ -126,12 +127,13 @@
         </div>
       </div>
     </div>
-
+<input type="hidden" id="userID" class="form-control input-md dobule" >
+<input type="hidden" id="reportId" class="form-control input-md dobule" >
   </div>
 </div>
 <!-- </col-lg-8> -->
 <div class="col-lg-4">
-    
+
         <div class="panel panel-teal">
           <div class="panel-heading dark-overlay"><svg class="glyph stroked calendar"><use xlink:href="#stroked-calendar"></use></svg>Calendar</div>
           <div class="panel-body">
@@ -145,22 +147,22 @@
 
 </div>
    <!--</row>  -->
-    
+
 <hr>
-   
+
 
    <!-- Save &send Email -->
   <div class="form-group ">
-    
+
     <div class="col-md-4 col-md-offset-9 ">
       <button id="save" name="save" type="submit" class="btn btn-success">Save</button>
       <button id="saveEmail" name="saveEmail"  class="btn btn-info">Save &amp; Send Email</button>
-   
+
     </div>
-      
+
   </div>
 
- 
+
 
 
 

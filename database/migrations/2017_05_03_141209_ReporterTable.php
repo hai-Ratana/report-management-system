@@ -26,9 +26,10 @@ class ReporterTable extends Migration
             $table->string('action');
             $table->string('knowledge',null);
             $table->string('impression',null);
-            
-            
-            
+            $table->timestamps();
+
+
+
         });
     }
 
@@ -39,6 +40,6 @@ class ReporterTable extends Migration
      */
     public function down()
     {
-       Schema::dropIfExits('reportTable');
+       Schema::drop('reportTable');
     }
 }

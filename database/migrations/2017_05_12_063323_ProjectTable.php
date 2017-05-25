@@ -28,6 +28,6 @@ class ProjectTable extends Migration
      */
     public function down()
     {
-       Schema::dropIfExists('projects');
+       Schema::drop('projects');
     }
 }

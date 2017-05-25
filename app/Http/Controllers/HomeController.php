@@ -26,7 +26,7 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     public function user(Request $request){
          $user = Auth::user()->id;
         $Project = ProjectTable::all();
@@ -37,16 +37,16 @@ class HomeController extends Controller
                 return response()->json(['report' => $reports]);
             }
             $reports = Report::paginate(5);
-            
+
         }else{
             $reports = Report::where('idUser',$user)->paginate(5);
         }
-        
+
         return view('/reportmg/content',[
             'projects' => $Project,
             'users' => $users,
             'reports' => $reports
-            
+
             ]);
     }
      public function storeUser(Request $request){
@@ -80,9 +80,9 @@ class HomeController extends Controller
                     }else{
                     $user->password = bcrypt($request->get('password'));
                     $user->save();
-                              
+
                     }
-                    
+
                     return response()->json(['status' => "200",'users' => $user]);
 
                 }
@@ -96,25 +96,25 @@ class HomeController extends Controller
                 $delete = User::find($request->get('id'));
                 if(!empty($delete)){
                   $delete->delete();
-                  return response()->json(['status'=>'200']);  
+                  return response()->json(['status'=>'200']);
                 }
                 return response()->json(['status'=>'400']);
             }
 
             return "no connection";
         }
-       
-         
+
+
         public function storeProjects(Request $request){
              $newProject = new ProjectTable;
             if ($request->ajax()){
                 if($request->has('nameProject') && $request->has('duration')){
-                   
+
                     $newProject->nameProject = $request->get('nameProject');
                     $newProject->description = $request->get('description');
                     $newProject->duration = $request->get('duration');
                     $newProject->other = $request->get('other');
-                       
+
                     $newProject->save();
                     return response()->json(['status' => '200','datas' => $newProject]);
                 }
@@ -138,9 +138,9 @@ class HomeController extends Controller
                     $updateProject->description = $request->get('description');
                     $updateProject->duration = $request->get('duration');
                     $updateProject->other = $request->get('other');
-                       
+
                     $updateProject->save();
-                    
+
                     return response()->json(['status'=> 'updated','data'=> $updateProject]);
                 }
                      return response()->json(['status'=> '400','data'=> 'not found id']);
@@ -148,15 +148,15 @@ class HomeController extends Controller
             return "faild";
         }
         public function removeProject($id,Request $request){
-           
+
             if($request->ajax()){
                 $project = ProjectTable::find($id)->delete();
-                 
+
                 return response()->json(['status' => 'deleted']);
             }
             return "faild";
         }
-    
+
     public function createReport(){
         $newReport = new Report;
         if(Input::has('idUser') && Input::has('startTime') && Input::has('stopTime') && Input::has('task')){
@@ -179,19 +179,44 @@ class HomeController extends Controller
     }
     public function filterReport(Request $request){
         if($request->ajax()){
-            
+
         $report = Report::whereDate('created_at','=',$request->get('day'))->get();
             if(!empty($report)){
-             return response()->json(['report' => $report]);   
+             return response()->json(['status'=>'200','datas' => $report]);
             }else{
-             return response()->json(['report' => 'not found']);   
+             return response()->json(['datas' => 'not found']);
             }
-            
+
         }
         return "no connection";
     }
+    public function editReport(Request $request){
+
+      if($request->ajax()){
+        $edit = Report::find($request->get('id'));
+        if(!empty($edit)){
+          return response()->json(['status' => '200' ,'edit' => $edit]);
+        }else{
+
+
+        return response()->json(['status' => '400' ,'edit' => 'not found']);
+      }
+      }
+        return "no connection";
+    }
+    public function removeReport(Request $request){
+      if($request->ajax()){
+        $delete = Report::find($request->get('id'));
+        if(!empty($delete)){
+          $delete->delete();
+          return response()->json(['status' => 'deleted']);
+        }
+        return response()->json(['status' => '200']);
+      }
+      return 'no connection';
+    }
     public function test(){
-       
+
      $report = Report::whereDate('created_at','=','2017-05-12')->get();
      return $report;
     }

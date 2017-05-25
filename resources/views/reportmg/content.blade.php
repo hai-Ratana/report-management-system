@@ -2,7 +2,7 @@
 
 @section('content')
 
-	
+
         <div class="row">
             <div class="col-md-12 ">
                 <div class="panel panel-default">
@@ -24,39 +24,39 @@
                                   </li>
                                   <li><a href="{{ route('logout')}}"><i class="fa fa-sign-out" aria-hidden="true"></i> logout</a></li>
                                 </ul>
-                              </div> 
+                              </div>
                         </div>
 
                     </div>
                     <div class="panel-body">
 
                         <ul class="nav nav-pills nav-tabs nav-justified">
-                            <li class=""><a data-toggle="tab" href="#new"><i class="fa fa-address-card-o" aria-hidden="true"></i> New</a></li>
-                            <li ><a data-toggle="tab" href="#view"><i class="fa fa-list-alt " aria-hidden="true"></i> View</a></li>
-                             @if (Auth::user()->role == 1) 
+                            <li class="Tab1"><a data-toggle="tab" href="#new"><i class="fa fa-address-card-o" aria-hidden="true"></i> New</a></li>
+                            <li class="Tab2" ><a data-toggle="tab" href="#view"><i class="fa fa-list-alt " aria-hidden="true"></i> View</a></li>
+                             @if (Auth::user()->role == 1)
                             <li><a data-toggle="tab" href="#admin"><i class="fa fa-user-secret" aria-hidden="true"></i> Admin</a></li>
                             @endif
                         </ul>
 
                         <div class="tab-content">
-                            <div id="new" class="tab-pane fade in active">
+                            <div id="new" class="tab-pane fade in Tab1 active">
                                 <br>
-                               
-                                    @include('reportmg.partContent.new')    
-                                
-                                
+
+                                    @include('reportmg.partContent.new')
+
+
                             </div>
-                            <div id="view" class="tab-pane fade">
+                            <div id="view" class="tab-pane fade Tab2">
 
                                 <br>
                                     @include('reportmg.partContent.view')
                             </div>
-                           
+
                             <div id="admin"  class="tab-pane fade">
                                 <br>
                                     @include('reportmg.partContent.admin')
                             </div>
-                            
+
                         </div>
 
 

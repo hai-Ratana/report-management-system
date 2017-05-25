@@ -5,7 +5,7 @@ $(document).ready(function(){
                   cache:false
               }
           });
-          
+
 // Tab user
       $(document).on('click','#users',function(){
           $('#frmUser').trigger("reset");
@@ -19,8 +19,8 @@ $(document).ready(function(){
       });
 
       $('.footer-users').on('click','.storeUser',function(){
-          
-        
+
+
         var url = $(this).data('url');
         var data = {
               firstname : $('#firstname').val(),
@@ -29,7 +29,7 @@ $(document).ready(function(){
               role : $('#role').val(),
               password : $('#password').val()
             };
-              
+
 
         $.ajax({
           url: url,
@@ -60,7 +60,7 @@ $(document).ready(function(){
       $('.action-user').removeClass('storeUser');
       $('.action-user').removeClass('deleteUser');
       $('#footer-btnsubmit-user').text("Edit");
-      $('#userModal').modal('show');      
+      $('#userModal').modal('show');
 });
   $('.footer-users').on('click','.changeUser',function(){
       var url = $(this).data('edit');
@@ -89,18 +89,18 @@ $(document).ready(function(){
       $('#frmUser').hide();
       $('#msgid-user').text($(this).data('fn')+' '+$(this).data('ln'));
       $('.warningmsg-user').show();
-      
+
       $('.action-user').addClass('deleteUser');
       $('.action-user').removeClass('changeUser');
       $('.action-user').removeClass('storeUser');
       $('#footer-btnsubmit-user').text("Delete");
-      $('#userModal').modal('show');           
+      $('#userModal').modal('show');
   });
   $('.footer-users').on('click','.deleteUser',function(){
       var url= $(this).data('delete');
       var id = $('#userId').val();
-      
-      
+
+
       $.ajax({
           url:url,
           type:'GET',
@@ -108,7 +108,7 @@ $(document).ready(function(){
           dataType:'JSON',
           success:function(response){
             $('.user'+id).remove();
-            $('#userModal').modal('hide');  
+            $('#userModal').modal('hide');
           }
       });
   });
@@ -150,7 +150,7 @@ $(document).ready(function(){
       });
 
      $('.footer-project').on('click','.storeProject',function(){
-      
+
           var url = $(this).data('add');
 
           var Data ={
@@ -159,15 +159,15 @@ $(document).ready(function(){
                    duration : $('#duration').val(),
                    other : $('#other').val()
                   };
-         
+
           $.ajax({
               url:url,
               type:'POST',
               data:Data,
               dataType:'JSON',
               success:function(response){
-                  
-                  
+
+
                   $('#frmProject').trigger("reset");
                   $("#project-list").append(getRow(response.datas));
                   $('#projecForm').modal('hide');
@@ -205,7 +205,7 @@ $(document).ready(function(){
      });
      // $('#projectModal').on('click',function(){
      //       $('#frmProject').trigger("reset");
-          
+
      //      $('#storeProject').removeClass('hidden');
      // });
      $('.footer-project').on('click','.changeProject',function(){
@@ -223,8 +223,8 @@ $(document).ready(function(){
               data:data,
               dataType:'JSON',
               success:function(response){
-                  
-                  
+
+
                   $('.project'+ response.data.id).replaceWith(getRow(response.data));
                   $('#projecForm').modal('hide');
               }
@@ -234,7 +234,7 @@ $(document).ready(function(){
 
             var id = $('#idProject').val();
             var url = $(this).data('url');
-            
+
             $.ajax({
                 url: url+'/'+id,
                 type:'GET',
@@ -271,7 +271,7 @@ $(document).ready(function(){
       var url = $(this).data('url');
       var input = $('#month').val();
       var strCut = input.split('/');
-     
+
       var data = { month:strCut[0],year:strCut[1]};
       $.ajax({
         url:url,
@@ -282,7 +282,7 @@ $(document).ready(function(){
           console.log(response.report);
           var row = '';
           $.each(response.report,function(index,value){
-             
+
               row +='<tr>';
               row +='<td>'+(index+1)+'</td>';
               row +='<td>'+ value.created_at+'</td>';
@@ -297,45 +297,87 @@ $(document).ready(function(){
               row +='</tr>';
             });
           $('#report-list').html(row);
-          
+
         }
       });
   });
 
   // event on calendar
   $('.timedatepicker').on('click','.active',function(){
-      
+
         var day = $('#toDay').val();
         var url = $('#toDay').data('url');
         // alert(url);
         $.ajax({
           url:url,
-          type:'POST',
+          type:'GET',
           data:{day},
           dataType:'JSON',
           success:function(response){
-            console.log(response.report);
-             $('#projectID').val('OOP'+response.report.id);
-             $('#project').val(response.report.project);
-             $('#breakTime').val(response.report.breakTime);
-             $('#startTime').val(response.report.startTime);
-             $('#endTime').val(response.report.endTime);
-             $('#totalTime').val(response.report.totalTime);
-             $('#task').val(response.report.task);
-             $('#action').val(response.report.action);
-             $('#knowledge').val(response.report.knowledge);
-             $('#impression').val(response.report.impression);
+            console.log(response);
+            $('#projectID').val(response.datas.projectId);
+            $('#project').val(response.datas.project);
+            $('#breakTime').val(response.datas.breakTime);
+            $('#startTime').val(response.datas.startTime);
+            $('#endTime').val(response.datas.stopTime);
+            $('#totalTime').val(response.datas.totalTime);
+            $('#task').val(response.datas.task);
+            $('#action').val(response.datas.action);
+            $('#knowledge').val(response.datas.knowledge);
+            $('#impression').val(response.datas.impression);
+            $('#userID').val(response.datas.idUser);
+            $('#reportId').val(response.datas.id);
           }
         });
- 
-      
+
+
   });
-  
-  //pagination 
+  //report-list
+  $(document).on('click','.removeReport', function(){
+      var url = $(this).data('url');
+      var id = $(this).data('id');
+      $.ajax({
+          url:url,
+          type:'GET',
+          data:{id},
+          success:function(response){
+            $('.report'+id).remove();
+
+          }
+      });
+  });
+  $(document).on('click','.editReport',function(){
+    var url = $(this).data('url');
+    var id = $(this).data('id');
+    $.ajax({
+      url:url,
+      type:'GET',
+      data:{id},
+      dataType:'JSON',
+      success:function(response){
+        $('#projectID').val(response.edit.projectId);
+        $('#project').val(response.edit.project);
+        $('#breakTime').val(response.edit.breakTime);
+        $('#startTime').val(response.edit.startTime);
+        $('#endTime').val(response.edit.stopTime);
+        $('#totalTime').val(response.edit.totalTime);
+        $('#task').val(response.edit.task);
+        $('#action').val(response.edit.action);
+        $('#knowledge').val(response.edit.knowledge);
+        $('#impression').val(response.edit.impression);
+        $('#userID').val(response.edit.idUser);
+        $('#reportId').val(response.edit.id);
+        $('.nav-tabs a[href="#new"]').tab('show');
+
+
+      }
+    });
+  });
+
+  //pagination
   // $(document).on('click','.pagination a',function(e)){
   //   e.preventDefault();
   //   console.log($(this).attr('href').split('page=')[0]);
   // });
 
 });
-		 

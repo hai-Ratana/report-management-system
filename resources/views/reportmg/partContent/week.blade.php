@@ -12,8 +12,8 @@
 
       </div>
 </div>
-     
-          
+
+
 
  <div class="row">
   <div class="col-md-12">
@@ -41,7 +41,7 @@
         <tbody id="report-list">
           @if(!empty($reports))
             @foreach($reports as $key => $report)
-            <tr>
+            <tr class="report{{ $report->id }}">
               <td>{!! ($key+1) !!}</td>
               <td>{!! date_format($report->created_at,"D/M/Y") !!}</td>
               <td>OOP{!! $report->projectId !!}</td>
@@ -51,25 +51,26 @@
               <td>{!! $report->breakTime !!}</td>
               <td>{!! $report->task !!}</td>
               <td>{!! $report->action !!}</td>
-              
+
               <td>{!! $report->totalTime !!}</td>
                @if(Auth::user()->role ==1)
               <td>
-                
-                
-                  <button class=" btn btn-primary form-control">Edit</button>
-                
-                 
-                    <button class=" btn btn-danger form-control">Delete</button>
-                
-               
-              
-               
+
+
+
+                    <button class=" btn btn-primary form-control editReport" data-url="{{ url('edit/report') }}" data-id="{{ $report->id }}">Edit</button>
+
+
+                    <button class=" btn btn-danger form-control removeReport" data-id="{{ $report->id }}" data-url="{{ url('remove/report') }}">Delete</button>
+
+
+
+
               </td>
                @endif
             </tr>
             @endforeach
-        
+
         </tbody>
       </table>
    </div>
@@ -78,8 +79,8 @@
       </div>
     @endif
   </div>
-   
+
  </div>
-  
+
   <hr>
   <button type="submit" class="btn btn-primary  col-md-offset-5 col-md-2">Print</button>
