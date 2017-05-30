@@ -215,6 +215,10 @@ class HomeController extends Controller
       }
       return 'no connection';
     }
+    public function print(){
+      $report = Report::where('idUser', Auth::User()->id)->get();
+      return view('reportmg.viewprint',['reports' => $report]);
+    }
     public function test(){
 
      $report = Report::whereDate('created_at','=','2017-05-12')->get();

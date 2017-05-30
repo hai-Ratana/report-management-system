@@ -128,8 +128,8 @@ $(document).ready(function(){
           userRow += '<td>';
           userRow += '<button class="btn btn-primary edit-user" data-userid="'+ data.id +'"';
           userRow += ' data-fn="'+ data.firstname +'" data-ln="'+ data.lastname +'"';
-          userRow += ' data-email="'+ data.email +'" data-role="'+ data.row +'">Edit</button>';
-          userRow += ' <button class="btn btn-danger removeUser" ';
+          userRow += ' data-email="'+ data.email +'" data-role="'+ data.role +'">Edit</button>';
+          userRow += ' <button class="btn btn-danger remove-user" ';
           userRow += 'data-userid="'+data.id+'" data-fn="'+data.firstname+'" data-ln="'+data.lastname+'">Delete</button>';
           userRow += '</td>';
           userRow += '</tr>';
@@ -315,18 +315,21 @@ $(document).ready(function(){
           dataType:'JSON',
           success:function(response){
             console.log(response);
-            $('#projectID').val(response.datas.projectId);
-            $('#project').val(response.datas.project);
-            $('#breakTime').val(response.datas.breakTime);
-            $('#startTime').val(response.datas.startTime);
-            $('#endTime').val(response.datas.stopTime);
-            $('#totalTime').val(response.datas.totalTime);
-            $('#task').val(response.datas.task);
-            $('#action').val(response.datas.action);
-            $('#knowledge').val(response.datas.knowledge);
-            $('#impression').val(response.datas.impression);
-            $('#userID').val(response.datas.idUser);
-            $('#reportId').val(response.datas.id);
+            $.each(response.datas,function(index,value){
+              $('#projectID').val(value.projectId);
+              $('#project').val(value.project);
+              $('#breakTime').val(value.breakTime);
+              $('#startTime').val(value.startTime);
+              $('#endTime').val(value.stopTime);
+              $('#totalTime').val(value.totalTime);
+              $('#task').val(value.task);
+              $('#action').val(value.action);
+              $('#knowledge').val(value.knowledge);
+              $('#impression').val(value.impression);
+              $('#userID').val(value.idUser);
+              $('#reportId').val(value.id);
+            });
+
           }
         });
 

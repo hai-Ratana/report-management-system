@@ -29,7 +29,7 @@ Route::get('filter/ajax','HomeController@user');
 Route::get('report/day','HomeController@filterReport');
 Route::get('remove/report','HomeController@removeReport');
 Route::get('edit/report','HomeController@editReport');
-Route::get('test','HomeController@test');
+Route::get('test','HomeController@print');
 
 
 
