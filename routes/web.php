@@ -29,8 +29,9 @@ Route::get('filter/ajax','HomeController@user');
 Route::get('report/day','HomeController@filterReport');
 Route::get('remove/report','HomeController@removeReport');
 Route::get('edit/report','HomeController@editReport');
-Route::get('test','HomeController@print');
-
+Route::post('update/report','HomeController@updateReport');
+Route::get('print','HomeController@print');
+Route::get('test','HomeController@test');
 
 
 Route::post('create/user/ajax','HomeController@storeUser');

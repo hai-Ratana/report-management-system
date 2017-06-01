@@ -267,8 +267,11 @@ $(document).ready(function(){
        return row;
   };
 
-  $('.filterReport').on('click',function(){
+  $(document).on('click','.filterReport',function(){
       var url = $(this).data('url');
+      var edit = $(this).data('edit-url');
+      var remove = $(this).data('remove-url');
+      var urlEdit = $(this).data('edit');
       var input = $('#month').val();
       var strCut = input.split('/');
 
@@ -279,30 +282,44 @@ $(document).ready(function(){
         data:data,
         dataType:'JSON',
         success:function(response){
-          console.log(response.report);
-          var row = '';
-          $.each(response.report,function(index,value){
+          var row = " ";
 
-              row +='<tr>';
-              row +='<td>'+(index+1)+'</td>';
-              row +='<td>'+ value.created_at+'</td>';
-              row +='<td>OOP'+value.id+'</td>';
-              row +='<td>'+value.project+'</td>';
-              row +='<td>'+value.startTime+'</td>';
-              row +='<td>'+value.stopTime+'</td>';
-              row +='<td>'+value.breakTime+'</td>';
-              row +='<td>'+value.task+'</td>';
-              row +='<td>'+value.action+'</td>';
-              row +='<td>'+value.totalTime+'</td>';
-              row +='</tr>';
-            });
+
+            $.each(response.reports,function(index,value){
+
+                row += '<tr class="report'+value.id +'">';
+                row += '<td>'+ (index+1) +'</td>';
+                row += '<td>'+ value.created_at +'</td>';
+                row += '<td>OOP'+ value.id +'</td>';
+                row += '<td>'+value.project+'</td>';
+                row += '<td>'+value.startTime+'</td>';
+                row += '<td>'+value.stopTime+'</td>';
+                row += '<td>'+value.breakTime+'</td>';
+                row += '<td>'+value.task+'</td>';
+                row += '<td>'+ value.action +'</td>';
+                row += '<td>'+value.totalTime+'</td>';
+                row += '<td>';
+                row += '<button class=" btn btn-primary form-control editReport" data-edit="'+ urlEdit +'" data-url="' + edit + '"';
+                row += 'data-id="'+ value.id +'">Edit</button>';
+                row += '<button class=" btn btn-danger form-control modal-delete" data-id="'+ value.id +'"';
+                row += '>Delete</button>';
+
+                row +='</td>';
+                row += ' </tr>';
+              });
+
+
           $('#report-list').html(row);
 
-        }
+        },
+        error: function (request, error) {
+          var row ="";
+        $('#report-list').html(row);}
       });
   });
 
   // event on calendar
+
   $('.timedatepicker').on('click','.active',function(){
 
         var day = $('#toDay').val();
@@ -314,21 +331,28 @@ $(document).ready(function(){
           data:{day},
           dataType:'JSON',
           success:function(response){
-            console.log(response);
-            $.each(response.datas,function(index,value){
-              $('#projectID').val(value.projectId);
-              $('#project').val(value.project);
-              $('#breakTime').val(value.breakTime);
-              $('#startTime').val(value.startTime);
-              $('#endTime').val(value.stopTime);
-              $('#totalTime').val(value.totalTime);
-              $('#task').val(value.task);
-              $('#action').val(value.action);
-              $('#knowledge').val(value.knowledge);
-              $('#impression').val(value.impression);
-              $('#userID').val(value.idUser);
-              $('#reportId').val(value.id);
-            });
+            console.log(response.datas);
+            if(response.datas.length > 0){
+              $.each(response.datas,function(index,value){
+                $('#projectID').val(value.projectId);
+                $('#project').val(value.project);
+                $('#breakTime').val(value.breakTime);
+                $('#startTime').val(value.startTime);
+                $('#endTime').val(value.stopTime);
+                $('#totalTime').val(value.totalTime);
+                $('#task').val(value.task);
+                $('#action').val(value.action);
+                $('#knowledge').val(value.knowledge);
+                $('#impression').val(value.impression);
+                $('#userID').val(value.idUser);
+                $('#reportId').val(value.id);
+              });
+
+            }else {
+              $('#report').trigger('reset');
+            
+            }
+
 
           }
         });
@@ -336,28 +360,37 @@ $(document).ready(function(){
 
   });
   //report-list
-  $(document).on('click','.removeReport', function(){
+  $(document).on('click','.modal-delete', function(){
+      $('#idReport').val($(this).data('id'));
+      $('#msgid').text($(this).data('id'));
+      $('#deleteReport').modal('show');
+
+  });
+  $('.footer-project').on('click','.removeReport', function(){
       var url = $(this).data('url');
-      var id = $(this).data('id');
+      var id = $('#idReport').val();
       $.ajax({
           url:url,
           type:'GET',
           data:{id},
           success:function(response){
             $('.report'+id).remove();
-
+              $('#deleteReport').modal('hide');
           }
       });
   });
   $(document).on('click','.editReport',function(){
     var url = $(this).data('url');
     var id = $(this).data('id');
+    var urlEdit = $(this).data('edit');
     $.ajax({
       url:url,
       type:'GET',
       data:{id},
       dataType:'JSON',
       success:function(response){
+        document.report.action = urlEdit;
+        $('#btn-title').text('update');
         $('#projectID').val(response.edit.projectId);
         $('#project').val(response.edit.project);
         $('#breakTime').val(response.edit.breakTime);
@@ -368,8 +401,8 @@ $(document).ready(function(){
         $('#action').val(response.edit.action);
         $('#knowledge').val(response.edit.knowledge);
         $('#impression').val(response.edit.impression);
-        $('#userID').val(response.edit.idUser);
-        $('#reportId').val(response.edit.id);
+        $('#idUser').val(response.edit.idUser);
+        $('#id').val(response.edit.id);
         $('.nav-tabs a[href="#new"]').tab('show');
 
 

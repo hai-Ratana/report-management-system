@@ -5,7 +5,7 @@
             <input type="text" id="month" name="month" class="form-control MonthInput">
           </div>
           <div class="col-md-2 ">
-            <button data-url="{{ url('filter/ajax')}}" class="filterReport btn">
+            <button data-url="{{ url('filter/ajax')}}" data-edit="{{ url('update/report') }}" data-edit-url="{{ url('edit/report') }}" data-remove-url="{{ url('remove/report') }}" class="filterReport btn">
               <span ><i class="glyphicon glyphicon-th"></i></span>
             </button>
           </div>
@@ -43,7 +43,7 @@
             @foreach($reports as $key => $report)
             <tr class="report{{ $report->id }}">
               <td>{!! ($key+1) !!}</td>
-              <td>{!! date_format($report->created_at,"D/M/Y") !!}</td>
+              <td>{!! date_format($report->created_at,"d/m/Y") !!}</td>
               <td>OOP{!! $report->projectId !!}</td>
               <td>{!! $report->project !!}</td>
               <td>{!! $report->startTime !!}</td>
@@ -58,10 +58,10 @@
 
 
 
-                    <button class=" btn btn-primary form-control editReport" data-url="{{ url('edit/report') }}" data-id="{{ $report->id }}">Edit</button>
+                    <button class=" btn btn-primary form-control editReport" data-edit="{{ url('update/report') }}" data-url="{{ url('edit/report') }}" data-id="{{ $report->id }}">Edit</button>
 
 
-                    <button class=" btn btn-danger form-control removeReport" data-id="{{ $report->id }}" data-url="{{ url('remove/report') }}">Delete</button>
+                    <button class=" btn btn-danger form-control modal-delete" data-id="{{ $report->id }}">Delete</button>
 
 
 
@@ -83,4 +83,32 @@
  </div>
 
   <hr>
-  <button type="submit" class="btn btn-primary  col-md-offset-5 col-md-2">Print</button>
+  <a href="{!! url('print')!!}" target="_blank"><button type="submit" class="btn btn-primary  col-md-offset-5 col-md-2">Print</button></a>
+  <!-- Modal -->
+    <div class="modal modal-danger fade" id="deleteReport" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" id="title-project">Delete Report</h4>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="idReport" value="">
+            <div class="warningmsg ">
+              Are you sure want to delete Report ID :<strong id="msgid" style="color: red;"></strong>  ?
+            </div>
+
+        </div>
+          <div class="modal-footer footer-project">
+
+             <button id="" class="btn btn-success removeReport "  data-url="{{ url('remove/report') }}">Yes</button>
+            <button id="button2id" name="button2id" class="btn btn-danger" data-dismiss="modal">No</button>
+
+          </div>
+        </div>
+
+
+      </div>
+    </div>

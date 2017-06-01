@@ -33,8 +33,36 @@ class HomeController extends Controller
         $users = User::paginate(5);
         if(Auth::user()->role == 1){
             if($request->ajax()){
-                $reports = Report::whereYear('created_at',$request->get('year'))->whereMonth('created_at',$request->get('month'))->get();
-                return response()->json(['report' => $reports]);
+
+                $data = Report::whereYear('created_at',$request->get('year'))->whereMonth('created_at',$request->get('month'))->get();
+                if(!empty($data)){
+                  foreach ($data as $key => $value) {
+                    $reports[] = ([
+                      'id' => $value->id,
+                      'idUser' => $value->idUser,
+                      'projectId' => $value->projectId,
+                      'project' => $value->project,
+                      'totalTime' => $value->totalTime,
+                      'startTime' => $value->startTime,
+                      'stopTime' => $value->stopTime,
+                      'breakTime' => $value->breakTime,
+                      'task' => $value->task,
+                      'action' => $value->action,
+                      'knowledge' => $value->knowledge,
+                      'impression' => $value->impression,
+                      'created_at' => date_format($value->created_at,"d/m/Y") ]);
+
+
+
+                  };
+
+
+                  return response()->json(['reports' => $reports]);
+                }else {
+                  return response()->json(['status' => 'not found','reports' => '']);
+                }
+
+
             }
             $reports = Report::paginate(5);
 
@@ -181,6 +209,7 @@ class HomeController extends Controller
         if($request->ajax()){
 
         $report = Report::whereDate('created_at','=',$request->get('day'))->get();
+
             if(!empty($report)){
              return response()->json(['status'=>'200','datas' => $report]);
             }else{
@@ -204,6 +233,28 @@ class HomeController extends Controller
       }
         return "no connection";
     }
+    public function updateReport()
+    {
+      if(Input::has('id')){
+        $update  = Report::find(Input::get('id'));
+        $update->idUser = Input::get('idUser');
+        $update->projectId = Input::get('projectId');
+        $update->project = Input::get('project');
+        $update->startTime = Input::get('startTime');
+        $update->stopTime = Input::get('stopTime');
+        $update->totalTime = Input::get('totalTime');
+        $update->breakTime = Input::get('breakTime');
+        $update->task = Input::get('task');
+        $update->action = Input::get('action');
+        $update->knowledge = Input::get('knowledge');
+        $update->impression = Input::get('impression');
+
+        $update->update();
+        return redirect('report');
+
+      }
+       return "Faild";
+    }
     public function removeReport(Request $request){
       if($request->ajax()){
         $delete = Report::find($request->get('id'));
@@ -221,7 +272,35 @@ class HomeController extends Controller
     }
     public function test(){
 
-     $report = Report::whereDate('created_at','=','2017-05-12')->get();
-     return $report;
-    }
+      $data = Report::whereYear('created_at','2017')->whereMonth('created_at','05')->get();
+      if ($data = '' ){
+      return $data;
+      }
+        // foreach ($data as $key => $value) {
+        //   $reports[] = ([
+        //     'id' => $value->id,
+        //     'idUser' => $value->idUser,
+        //     'projectId' => $value->projectId,
+        //     'project' => $value->project,
+        //     'totalTime' => $value->totalTime,
+        //     'startTime' => $value->startTime,
+        //     'stopTime' => $value->stopTime,
+        //     'breakTime' => $value->breakTime,
+        //     'task' => $value->task,
+        //     'action' => $value->action,
+        //     'knowledge' => $value->knowledge,
+        //     'impression' => $value->impression,
+        //     'created_at' => date_format($value->created_at,"D/M/Y") ]);
+        //
+        //
+        //
+        // };
+        // return $reports;
+
+
+else{  return 'no';}
+      }
+
+
+
 }

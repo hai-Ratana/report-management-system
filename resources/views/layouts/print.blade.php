@@ -33,7 +33,7 @@
                           </div>
                       </div>
                       <div class="row">
-                        <div class="col-md-4 col-md-offset-5 fixed" >
+                        <div class="col-md-4 col-md-offset-5 " >
                           <button type="button" class=" col-md-4 btn btn-primary actionPrint" name="button">print</button>
                         </div>
                       </div>

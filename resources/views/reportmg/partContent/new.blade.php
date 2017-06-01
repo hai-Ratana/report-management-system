@@ -1,8 +1,9 @@
-<form class="form-horizontal" action="{{ url('create/report')}}" method="post">
+<form  id="report" name="report" class="form-horizontal" action="{{ url('create/report')}}" method="post">
    {{ csrf_field() }}
 <div class="row">
 
-   <input  type="hidden" class="form-control input-md" name="idUser" value="{!! Auth::user()->id !!}">
+   <input  type="hidden" class="form-control input-md" id="idUser" name="idUser" value="{!! Auth::user()->id !!}">
+   <input type="hidden" id="id"  name="id" class="form-control input-md dobule" >
 
 <div class="col-lg-8">
     <!-- project ID -->
@@ -10,10 +11,10 @@
     <div class="form-group ">
       <label class="col-md-1 control-label" for="selectbasic">project ID</label>
         <div class="col-md-3">
-        <select  id="projectID" name="projectId" class=" form-control">
-          @if(isset($edit)) <option  value="{{!! $edit->id !!}}" selected=""></option>@endif
+        <select  id="projectID" name="projectId" class=" selectItem form-control">
+          @if(isset($edit)) <option  value="{{!! $edit->id !!}}" selected></option>@endif
           @foreach($projects as $key => $projectID)
-          <option   value="{!! $projectID->id !!}" class="selecteVal" data-index="{!! $key !!}">00P{!! $projectID->id !!}</option>
+          <option   value="{!! $projectID->id !!}" id="selecteVal" data-index="{!! $key !!}">00P{!! $projectID->id !!}</option>
           @endforeach
         </select>
         </div>
@@ -52,7 +53,7 @@
       </div>
       <label class="col-md-1 control-label" for="textinput">Total Time</label>
       <div class="col-md-3">
-      <input id="totalTime" name="totalTime" placeholder="Total Time" class=" form-control input-md " required="" readonly type="text">
+      <input id="totalTime" name="totalTime" placeholder="Total Time" class=" form-control input-md " style="background-color:white;" required="" readonly type="text">
        </div>
 
     </div>
@@ -127,8 +128,8 @@
         </div>
       </div>
     </div>
-<input type="hidden" id="userID" class="form-control input-md dobule" >
-<input type="hidden" id="reportId" class="form-control input-md dobule" >
+
+
   </div>
 </div>
 <!-- </col-lg-8> -->
@@ -140,8 +141,8 @@
             <div id="calendar"  data-link-field="toDay" data-link-format="yyyy-mm-dd"></div>
           </div>
         </div>
-        <input  id="toDay" value="" data-url="{{ url('report/day')}}" class="form-control input-md" >
-        <input type="" class="form-control input-md dobule" >
+        <input  id="toDay" type="hidden" value="" data-url="{{ url('report/day')}}" class="form-control input-md" >
+
 </div>
 <!-- </col-lg-4> -->
 
@@ -155,7 +156,7 @@
   <div class="form-group ">
 
     <div class="col-md-4 col-md-offset-9 ">
-      <button id="save" name="save" type="submit" class="btn btn-success">Save</button>
+      <button id="save" name="save" type="submit" class="btn btn-success"><span id="btn-title">Save</span></button>
       <button id="saveEmail" name="saveEmail"  class="btn btn-info">Save &amp; Send Email</button>
 
     </div>

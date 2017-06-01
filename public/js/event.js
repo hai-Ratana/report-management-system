@@ -3,7 +3,7 @@ function parseTime(s) {
    var c = s.split(':');
    return parseInt(c[0]) * 60 + parseInt(c[1]);
 }
-$('#totalTime').on('click',function(){
+$('input[name="stopTime"]').on('change',function(){
 	var start = $('input[name="startTime"]').val();
 	var end = $('input[name="stopTime"]').val();
 	var breakTime = $('input[name="breakTime"]').val();
@@ -13,15 +13,17 @@ $('#totalTime').on('click',function(){
 	if(min == 0){
 		$(this).val(hour +'h');
 	}
-	$(this).val(hour +'h'+min +"mn");
-	
-	
+	$('#totalTime').val(hour +'h'+min +"mn");
+
+
 });
 
-$('.selecteVal').on('click',function(){
-        // alert($(this).data('index'));
-       
-        $("#project").prop('selectedIndex', $(this).data('index') );
+
+
+});
+$('#projectID').on('change',function(){
+
+        console.log(this.selectedIndex);
+        $("#project").prop('selectedIndex', this.selectedIndex );
+          
     });
-
-});

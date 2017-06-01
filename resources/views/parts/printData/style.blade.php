@@ -7,7 +7,7 @@
     <!-- Custom CSS -->
     <link href="{!! asset('/') !!}css/half-slider.css" rel="stylesheet">
 
-   <link href="{!! asset('/') !!}css/print.css" rel="stylesheet">
+   <link href="{!! asset('/') !!}css/print.css" rel="stylesheet" >
 <link href="css/styles.css" rel="stylesheet">
 
 
