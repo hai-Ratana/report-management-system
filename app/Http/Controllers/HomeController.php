@@ -31,6 +31,7 @@ class HomeController extends Controller
          $user = Auth::user()->id;
         $Project = ProjectTable::all();
         $users = User::paginate(5);
+
         if(Auth::user()->role == 1){
             if($request->ajax()){
 
@@ -42,13 +43,14 @@ class HomeController extends Controller
                       'idUser' => $value->idUser,
                       'projectId' => $value->projectId,
                       'project' => $value->project,
-                      'totalTime' => $value->totalTime,
+                      'totalTime' => date('H:i',$value->totalTime),
                       'startTime' => $value->startTime,
                       'stopTime' => $value->stopTime,
                       'breakTime' => $value->breakTime,
                       'task' => $value->task,
-                      'action' => $value->action,
-                      'knowledge' => $value->knowledge,
+                      'plan' => $value->plan,
+                      'note' => $value->note,
+                      'plustime' => $value->plustime,
                       'impression' => $value->impression,
                       'created_at' => date_format($value->created_at,"d/m/Y") ]);
 
@@ -68,12 +70,13 @@ class HomeController extends Controller
 
         }else{
             $reports = Report::where('idUser',$user)->paginate(5);
+
         }
 
         return view('/reportmg/content',[
             'projects' => $Project,
             'users' => $users,
-            'reports' => $reports
+            'reports' => $reports,
 
             ]);
     }
@@ -193,15 +196,17 @@ class HomeController extends Controller
             $newReport->project = Input::get('project');
             $newReport->startTime = Input::get('startTime');
             $newReport->stopTime = Input::get('stopTime');
-            $newReport->totalTime = Input::get('totalTime');
+            $newReport->totalTime = strtotime(Input::get('totalTime'));
             $newReport->breakTime = Input::get('breakTime');
+            $newReport->plustime = Report::plusTime((Input::get('totalTime')));
             $newReport->task = Input::get('task');
-            $newReport->action = Input::get('action');
-            $newReport->knowledge = Input::get('knowledge');
+            $newReport->plan = Input::get('action');
+            $newReport->note = Input::get('knowledge');
             $newReport->impression = Input::get('impression');
 
             $newReport->save();
             return redirect('report');
+
         }
         return "faild";
     }
@@ -240,13 +245,14 @@ class HomeController extends Controller
         $update->idUser = Input::get('idUser');
         $update->projectId = Input::get('projectId');
         $update->project = Input::get('project');
-        $update->startTime = Input::get('startTime');
-        $update->stopTime = Input::get('stopTime');
-        $update->totalTime = Input::get('totalTime');
+        $update->startTime = strtotime(Input::get('startTime'));
+        $update->stopTime = strtotime(Input::get('stopTime'));
+        $update->totalTime = strtotime(Input::get('totalTime'));
         $update->breakTime = Input::get('breakTime');
+        $update->plustime = Report::plustime(Input::get('totalTime'));
         $update->task = Input::get('task');
-        $update->action = Input::get('action');
-        $update->knowledge = Input::get('knowledge');
+        $update->plan = Input::get('action');
+        $update->note = Input::get('knowledge');
         $update->impression = Input::get('impression');
 
         $update->update();
@@ -271,34 +277,10 @@ class HomeController extends Controller
       return view('reportmg.viewprint',['reports' => $report]);
     }
     public function test(){
-
-      $data = Report::whereYear('created_at','2017')->whereMonth('created_at','05')->get();
-      if ($data = '' ){
-      return $data;
-      }
-        // foreach ($data as $key => $value) {
-        //   $reports[] = ([
-        //     'id' => $value->id,
-        //     'idUser' => $value->idUser,
-        //     'projectId' => $value->projectId,
-        //     'project' => $value->project,
-        //     'totalTime' => $value->totalTime,
-        //     'startTime' => $value->startTime,
-        //     'stopTime' => $value->stopTime,
-        //     'breakTime' => $value->breakTime,
-        //     'task' => $value->task,
-        //     'action' => $value->action,
-        //     'knowledge' => $value->knowledge,
-        //     'impression' => $value->impression,
-        //     'created_at' => date_format($value->created_at,"D/M/Y") ]);
-        //
-        //
-        //
-        // };
-        // return $reports;
-
-
-else{  return 'no';}
+        $start = '10:30 am';
+        $end = strtotime('8:0') ;
+        $time = date('H:i',$end);
+        return $time;
       }
 
 

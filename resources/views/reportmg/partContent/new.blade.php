@@ -31,7 +31,7 @@
       </div>
       <label class="col-md-1 control-label" for="textinput">Break Time</label>
       <div class="col-md-3">
-         <input id="breakTime" name="breakTime" placeholder="hh:mn" class="form-control input-md "  required="" type="text">
+         <input id="breakTime" name="breakTime" placeholder="mm" class="form-control input-md "  required="" type="text">
       </div>
 
 
@@ -42,13 +42,13 @@
 
     <!-- Start Time-->
     <div class="form-group">
-      <label class=" col-md-1 control-label" for="textinput">Start Time</label>
+      <label class=" col-md-1 control-label " for="textinput">Start Time</label>
       <div class="col-md-3">
-        <input id="startTime" name="startTime" placeholder="hh:mn" class="form-control date input-md "  data-date="" data-date-format=" HH:ii p" required="" type="text">
+        <input id="startTime" name="startTime" placeholder="hh:mm p" class="form-control date input-md TimeInput"   data-date-format=" HH:ii p" required="" type="text">
       </div>
        <label class="col-md-1 control-label" for="textinput">Stop Time</label>
       <div class="col-md-3">
-        <input id="endTime" name="stopTime" placeholder="hh:mn" class="form-control date input-md "
+        <input id="endTime" name="stopTime" placeholder="hh:mn p" class="form-control date input-md TimeInput "
         data-date="" data-date-format=" HH:ii p"  required="" type="text">
       </div>
       <label class="col-md-1 control-label" for="textinput">Total Time</label>
@@ -142,9 +142,10 @@
           </div>
         </div>
         <input  id="toDay" type="hidden" value="" data-url="{{ url('report/day')}}" class="form-control input-md" >
-
+        
 </div>
 <!-- </col-lg-4> -->
+
 
 </div>
    <!--</row>  -->
@@ -157,7 +158,7 @@
 
     <div class="col-md-4 col-md-offset-9 ">
       <button id="save" name="save" type="submit" class="btn btn-success"><span id="btn-title">Save</span></button>
-      <button id="saveEmail" name="saveEmail"  class="btn btn-info">Save &amp; Send Email</button>
+      <button id="saveEmail" type="submit" name="saveEmail" data-url="{{url('sendmail')}}" class="btn btn-info sendMail">Save &amp; Send Email</button>
 
     </div>
 

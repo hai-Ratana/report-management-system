@@ -32,6 +32,7 @@ Route::get('edit/report','HomeController@editReport');
 Route::post('update/report','HomeController@updateReport');
 Route::get('print','HomeController@print');
 Route::get('test','HomeController@test');
+Route::post('sendmail','MailController@sendMail');
 
 
 Route::post('create/user/ajax','HomeController@storeUser');

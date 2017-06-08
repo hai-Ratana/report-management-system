@@ -11,6 +11,12 @@ class Report extends Model
 	protected $fillable = [
 
 		  'id','idUser','projectId','project','totalTime','startTime','stopTime',
-		  'breakTime', 'task','action', 'knowledge','impression'
+		  'breakTime','plustime','plan', 'task','note','impression'
 	];
+  static function plusTime($total)
+  {
+      $OT = strtotime($total) - 1496822400;
+      return $OT;
+
+  }
 }

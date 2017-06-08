@@ -31,8 +31,9 @@
             <th>Stop</th>
             <th>Break</th>
             <th>Task</th>
-            <th>Action</th>
+            <th>Plan</th>
             <th>Total hours</th>
+            <th>Plus Hours</th>
             @if(Auth::user()->role ==1)
             <th>other</th>
             @endif
@@ -50,18 +51,21 @@
               <td>{!! $report->stopTime !!}</td>
               <td>{!! $report->breakTime !!}</td>
               <td>{!! $report->task !!}</td>
-              <td>{!! $report->action !!}</td>
+              <td>{!! $report->plan !!}</td>
 
-              <td>{!! $report->totalTime !!}</td>
+              <td>{!! date('H:i',$report->totalTime) !!}</td>
+              <td>{!! date('H:i', $report->plustime) !!}</td>
                @if(Auth::user()->role ==1)
               <td>
 
 
+                      <button class="btn btn-primary editReport" data-edit="{{ url('update/report') }}" data-url="{{ url('edit/report') }}" data-id="{{ $report->id }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                      <button class=" btn btn-danger modal-delete" data-id="{{ $report->id }}"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
 
-                    <button class=" btn btn-primary form-control editReport" data-edit="{{ url('update/report') }}" data-url="{{ url('edit/report') }}" data-id="{{ $report->id }}">Edit</button>
 
 
-                    <button class=" btn btn-danger form-control modal-delete" data-id="{{ $report->id }}">Delete</button>
+
+
 
 
 

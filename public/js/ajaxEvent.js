@@ -128,9 +128,9 @@ $(document).ready(function(){
           userRow += '<td>';
           userRow += '<button class="btn btn-primary edit-user" data-userid="'+ data.id +'"';
           userRow += ' data-fn="'+ data.firstname +'" data-ln="'+ data.lastname +'"';
-          userRow += ' data-email="'+ data.email +'" data-role="'+ data.role +'">Edit</button>';
+          userRow += ' data-email="'+ data.email +'" data-role="'+ data.role +'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>';
           userRow += ' <button class="btn btn-danger remove-user" ';
-          userRow += 'data-userid="'+data.id+'" data-fn="'+data.firstname+'" data-ln="'+data.lastname+'">Delete</button>';
+          userRow += 'data-userid="'+data.id+'" data-fn="'+data.firstname+'" data-ln="'+data.lastname+'"><i class="fa fa-trash-o" aria-hidden="true"></i></button>';
           userRow += '</td>';
           userRow += '</tr>';
         return userRow;
@@ -258,10 +258,10 @@ $(document).ready(function(){
         row += " data-id='"+ data.id +"' ";
         row += "data-name='"+ data.nameProject +"' data-desc='"+ data.description +"'";
         row += "data-duration='"+ data.duration +"' data-other='"+ data.other +"'";
-        row += " >Edit</button>";
+        row += " ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>";
         row += ' <button class="btn btn-danger removeProject"';
         row += ' data-name="'+data.nameProject+'" data-id="'+data.id+'"';
-        row += '>Delete</button>';
+        row += '><i class="fa fa-trash-o" aria-hidden="true"></i></button>';
         row +=  '</td>';
         row += '</tr>';
        return row;
@@ -299,10 +299,10 @@ $(document).ready(function(){
                 row += '<td>'+ value.action +'</td>';
                 row += '<td>'+value.totalTime+'</td>';
                 row += '<td>';
-                row += '<button class=" btn btn-primary form-control editReport" data-edit="'+ urlEdit +'" data-url="' + edit + '"';
-                row += 'data-id="'+ value.id +'">Edit</button>';
-                row += '<button class=" btn btn-danger form-control modal-delete" data-id="'+ value.id +'"';
-                row += '>Delete</button>';
+                row += '<button class=" btn btn-primary editReport" data-edit="'+ urlEdit +'" data-url="' + edit + '"';
+                row += 'data-id="'+ value.id +'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>';
+                row += '<button class=" btn btn-danger modal-delete" data-id="'+ value.id +'"';
+                row += '><i class="fa fa-trash-o" aria-hidden="true"></i></button>';
 
                 row +='</td>';
                 row += ' </tr>';
@@ -350,7 +350,7 @@ $(document).ready(function(){
 
             }else {
               $('#report').trigger('reset');
-            
+
             }
 
 
@@ -415,5 +415,9 @@ $(document).ready(function(){
   //   e.preventDefault();
   //   console.log($(this).attr('href').split('page=')[0]);
   // });
+  $('.sendMail').on('click',function(){
+
+    document.report.action = $(this).data('url');
+  })
 
 });

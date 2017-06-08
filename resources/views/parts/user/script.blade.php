@@ -11,7 +11,7 @@
   <script src="{!! asset('/') !!}js/event.js"></script>
   <script src="js/ajaxEvent.js"></script>
 
-  
+
   <script type="text/javascript">
   	$('#calendar').timedatepicker({
       todayHighlight: 1,
@@ -24,14 +24,11 @@
         format:'mm/yyyy',
         autoclose: 1,
         startView:3 ,
-         minView: 4,   
-        
+         minView: 4,
+
         showMeridian: 1
     });
-    $('timedatepicker').on("dp.change", function(e){
-        alert('Hey');
-    });
     
-		
+
+
   </script>
-  

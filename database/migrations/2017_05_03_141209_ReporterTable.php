@@ -18,14 +18,17 @@ class ReporterTable extends Migration
             $table->integer('idUser');
             $table->integer('projectId');
             $table->string('project');
-            $table->string('totalTime');
-            $table->string('startTime');
-            $table->string('stopTime');
-            $table->string('breakTime');
-            $table->string('task');
-            $table->string('action');
-            $table->string('knowledge',null);
-            $table->string('impression',null);
+            $table->time('startTime');
+            $table->time('stopTime');
+            $table->integer('breakTime');
+            $table->integer('totalTime');
+            $table->integer('plustime',null);
+            $table->text('impression',null);
+            $table->text('task');
+            $table->text('plan');
+            $table->text('note',null);
+            
+
             $table->timestamps();
 
 
