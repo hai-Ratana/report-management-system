@@ -13,12 +13,12 @@
 
 <body>
 
-   
+
 
     @include('parts.user.header')
     <br>
-    <!-- Page Content --> 
-    <content>
+    <!-- Page Content -->
+
 
         <div class="container">
 
@@ -28,12 +28,12 @@
 
         </div>
         <!-- /.container -->
-    </content>
-    
 
-    
+
+
+
  @include('parts.user.script')
-    
+
 
 </body>
 

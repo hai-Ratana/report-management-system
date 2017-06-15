@@ -27,10 +27,11 @@
                       <th>Stop</th>
                       <th>Break</th>
                       <th>Task</th>
-                      <th>Action</th>
-                      <th>knowledge</th>
+                      <th>Plan</th>
+                      <th>Note</th>
                       <th>impression</th>
                       <th>Total hours</th>
+                      <th>Plus hours</th>
 
                     </tr>
                   </thead>
@@ -44,12 +45,13 @@
                         <td>{!! $report->project !!}</td>
                         <td>{!! $report->startTime !!}</td>
                         <td>{!! $report->stopTime !!}</td>
-                        <td>{!! $report->breakTime !!}</td>
+                        <td>{!! $report->breakTime !!} min</td>
                         <td>{!! $report->task !!}</td>
-                        <td>{!! $report->action !!}</td>
-                        <td>{!! $report->knowledge !!}</td>
+                        <td>{!! $report->plan !!}</td>
+                        <td>{!! $report->note !!}</td>
                          <td>{!! $report->impression !!}</td>
-                        <td>{!! $report->totalTime !!}</td>
+                         <td>{!! $report->totalTime!!} min</td>
+                         <td>{!! $report->plustime!!} min</td>
 
                       </tr>
                       @endforeach

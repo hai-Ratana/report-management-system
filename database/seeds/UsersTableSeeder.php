@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
             'lastname' => 'Hai',
             'email' => 'hairatana@gmail.com',
             'role' => 1,
-            'login-date' => date('Y-m-d H:i:s'),
+            'login_date' => date('Y-m-d H:i:s'),
             'password' => bcrypt('1234'),
         ]);
         DB::table('projects')->insert([

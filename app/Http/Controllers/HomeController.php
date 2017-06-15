@@ -43,7 +43,7 @@ class HomeController extends Controller
                       'idUser' => $value->idUser,
                       'projectId' => $value->projectId,
                       'project' => $value->project,
-                      'totalTime' => date('H:i',$value->totalTime),
+                      'totalTime' => $value->totalTime,
                       'startTime' => $value->startTime,
                       'stopTime' => $value->stopTime,
                       'breakTime' => $value->breakTime,
@@ -53,10 +53,7 @@ class HomeController extends Controller
                       'plustime' => $value->plustime,
                       'impression' => $value->impression,
                       'created_at' => date_format($value->created_at,"d/m/Y") ]);
-
-
-
-                  };
+              };
 
 
                   return response()->json(['reports' => $reports]);
@@ -85,11 +82,13 @@ class HomeController extends Controller
         if($request->ajax()){
             if($request->has('email') && $request->has('password')){
                 $user = new User;
-                $user['firstname'] = $request->get('firstname');
-                $user['lastname'] = $request->get('lastname');
-                $user['email'] = $request->get('email');
-                $user['role'] = $request->get('role');
-                $user['password'] = bcrypt($request->get('password'));
+                $user->firstname = $request->get('firstname');
+                $user->lastname = $request->get('lastname');
+                $user->user = $request->get('user');
+                $user->email = $request->get('email');
+                $user->role = $request->get('role');
+
+                $user->password = bcrypt($request->get('password'));
                 $user->save();
                 return response()->json(['status'=>'200',
                                     'users' => $user]);
@@ -104,6 +103,7 @@ class HomeController extends Controller
                 if(!empty($user)){
                     $user->firstname = $request->get('firstname');
                     $user->lastname = $request->get('lastname');
+                      $user->user = $request->get('user');
                     $user->email = $request->get('email');
                     $user->role = $request->get('role');
                     if(empty($request->get('password'))){
@@ -196,7 +196,7 @@ class HomeController extends Controller
             $newReport->project = Input::get('project');
             $newReport->startTime = Input::get('startTime');
             $newReport->stopTime = Input::get('stopTime');
-            $newReport->totalTime = strtotime(Input::get('totalTime'));
+            $newReport->totalTime = Input::get('totalTime');
             $newReport->breakTime = Input::get('breakTime');
             $newReport->plustime = Report::plusTime((Input::get('totalTime')));
             $newReport->task = Input::get('task');
@@ -245,9 +245,9 @@ class HomeController extends Controller
         $update->idUser = Input::get('idUser');
         $update->projectId = Input::get('projectId');
         $update->project = Input::get('project');
-        $update->startTime = strtotime(Input::get('startTime'));
-        $update->stopTime = strtotime(Input::get('stopTime'));
-        $update->totalTime = strtotime(Input::get('totalTime'));
+        $update->startTime = Input::get('startTime');
+        $update->stopTime = Input::get('stopTime');
+        $update->totalTime = Input::get('totalTime');
         $update->breakTime = Input::get('breakTime');
         $update->plustime = Report::plustime(Input::get('totalTime'));
         $update->task = Input::get('task');
@@ -277,10 +277,7 @@ class HomeController extends Controller
       return view('reportmg.viewprint',['reports' => $report]);
     }
     public function test(){
-        $start = '10:30 am';
-        $end = strtotime('8:0') ;
-        $time = date('H:i',$end);
-        return $time;
+        return url();
       }
 
 

@@ -27,6 +27,7 @@
 
             <th>Firstname</th>
             <th>Lastname</th>
+            <th>Username</th>
             <th>Email</th>
             <th>Role</th>
             <th>Password</th>
@@ -41,6 +42,7 @@
              <tr class="user{{ $user->id }}">
               <td>{!! $user->firstname !!}</td>
               <td>{!! $user->lastname !!}</td>
+              <td>{!! $user->user !!}</td>
               <td>{!! $user->email !!}</td>
               <td>
               @if($user->role ==1)
@@ -52,7 +54,7 @@
                <td>......</td>
               <td>
 
-                <button class="btn btn-primary edit-user" data-userid="{{ $user->id }}" data-fn="{{ $user->firstname }}" data-ln="{{ $user->lastname }}" data-email="{{ $user->email }}" data-role="{{ $user->role }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                <button class="btn btn-primary edit-user" data-userid="{{ $user->id }}" data-fn="{{ $user->firstname }}" data-ln="{{ $user->lastname }}" data-email="{{ $user->email }}" data-role="{{ $user->role }}" data-user="{{ $user->user }}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
                 <button class="btn btn-danger remove-user" data-userid="{{ $user->id }}" data-fn="{{ $user->firstname }}" data-ln="{{ $user->lastname }}"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
               </td>
             </tr>

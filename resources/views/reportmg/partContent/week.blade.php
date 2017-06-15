@@ -49,12 +49,12 @@
               <td>{!! $report->project !!}</td>
               <td>{!! $report->startTime !!}</td>
               <td>{!! $report->stopTime !!}</td>
-              <td>{!! $report->breakTime !!}</td>
+              <td>{!! $report->breakTime !!} min</td>
               <td>{!! $report->task !!}</td>
               <td>{!! $report->plan !!}</td>
 
-              <td>{!! date('H:i',$report->totalTime) !!}</td>
-              <td>{!! date('H:i', $report->plustime) !!}</td>
+              <td>{!! $report->totalTime!!} min</td>
+              <td>{!! $report->plustime !!} min</td>
                @if(Auth::user()->role ==1)
               <td>
 

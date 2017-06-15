@@ -6,7 +6,7 @@
 
     <!-- Custom CSS -->
     <link href="{!! asset('/') !!}css/half-slider.css" rel="stylesheet">
-    
+
    <link href="css/datepicker3.css" rel="stylesheet">
 <link href="css/styles.css" rel="stylesheet">
 <link href="css/bootstrap-datepicker32.css" rel="stylesheet">

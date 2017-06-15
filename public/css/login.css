@@ -73,7 +73,7 @@ body{
     border-radius: 50%;
 }
 .profile-title{
-   
+
     font-family: 'Baloo Thambi';font-size: 18px;
 }
 .need-help
@@ -84,4 +84,12 @@ body{
 {
     display: block;
     margin-top: 10px;
+}
+.forget{
+  text-align: center;
+    color: white;
+}
+.forget:hover{
+    text-decoration: none;
+    color: white;
 }

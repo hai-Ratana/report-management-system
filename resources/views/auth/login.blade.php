@@ -8,7 +8,7 @@
             <h1 class="text-center login-title">login to working report management</h1>
 
             <div class="account-wall">
-                <img class="profile-img" src="img/PPIT-logo.png" alt="">
+                <img class="profile-img" src="{!! asset('/') !!}img/PPIT-logo.png" alt="">
                      <p class="text-center text-primary profile-title">Phnom Penh Institute of Technology</p>
                 <form class="form-signin" role="form" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
@@ -16,14 +16,19 @@
                 <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                 login</button>
-                <button class="btn btn-lg btn btn-danger btn-block" >
-                forget password</button>
-              
-              
-                
+                  <!-- <button class="btn btn-lg btn-danger btn-block" >
+                  forget password</button> -->
+                  <a href="{{ route('password.request') }}" class="forget btn btn-lg btn-danger btn-block">
+
+                    forget password
+
+                  </a>
+
+
+
                 </form>
             </div>
-            
+
         </div>
     </div>
 </div>

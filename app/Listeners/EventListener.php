@@ -2,9 +2,9 @@
 
 namespace App\Listeners;
 
-use App\Events\Event;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use App\User;
+use Carbon\Carbon;
+use Illuminate\Auth\Events\Login;
 
 class EventListener
 {
@@ -24,8 +24,9 @@ class EventListener
      * @param  Event  $event
      * @return void
      */
-    public function handle(Event $event)
+    public function handle(login $event)
     {
-        //
+      $event->user->update(['login_date' => Carbon::now()]);
     }
+
 }

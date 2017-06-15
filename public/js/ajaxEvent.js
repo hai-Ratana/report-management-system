@@ -6,6 +6,7 @@ $(document).ready(function(){
               }
           });
 
+
 // Tab user
       $(document).on('click','#users',function(){
           $('#frmUser').trigger("reset");
@@ -25,6 +26,7 @@ $(document).ready(function(){
         var data = {
               firstname : $('#firstname').val(),
               lastname : $('#lastname').val(),
+              user: $('#user').val(),
               email : $('#email').val(),
               role : $('#role').val(),
               password : $('#password').val()
@@ -51,6 +53,7 @@ $(document).ready(function(){
       $('#title-user').text('Edit User');
       $('#firstname').val($(this).data('fn') );
       $('#lastname').val($(this).data('ln'));
+      $('#user').val($(this).data('user'));
       $('#email').val($(this).data('email'));
       $('#role').val($(this).data('role'));
       $('#userId').val($(this).data('userid'));
@@ -68,6 +71,7 @@ $(document).ready(function(){
               id : $('#userId').val(),
               firstname : $('#firstname').val(),
               lastname : $('#lastname').val(),
+              user : $('#user').val(),
               email : $('#email').val(),
               role : $('#role').val(),
               password : $('#password').val()};
@@ -118,6 +122,7 @@ $(document).ready(function(){
           userRow += '<tr class="user'+ data.id +'">';
           userRow += '<td>' + data.firstname + '</td>';
           userRow += '<td>' + data.lastname + '</td>';
+          userRow += '<td>' + data.user + '</td>';
           userRow += '<td>' + data.email + '</td>';
           if(data.role == 1){
                userRow += '<td> Adim </td>';
@@ -128,7 +133,7 @@ $(document).ready(function(){
           userRow += '<td>';
           userRow += '<button class="btn btn-primary edit-user" data-userid="'+ data.id +'"';
           userRow += ' data-fn="'+ data.firstname +'" data-ln="'+ data.lastname +'"';
-          userRow += ' data-email="'+ data.email +'" data-role="'+ data.role +'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>';
+          userRow += ' data-email="'+ data.email +'" data-role="'+ data.role +'"  data-user="'+ data.user +'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>';
           userRow += ' <button class="btn btn-danger remove-user" ';
           userRow += 'data-userid="'+data.id+'" data-fn="'+data.firstname+'" data-ln="'+data.lastname+'"><i class="fa fa-trash-o" aria-hidden="true"></i></button>';
           userRow += '</td>';
@@ -258,7 +263,7 @@ $(document).ready(function(){
         row += " data-id='"+ data.id +"' ";
         row += "data-name='"+ data.nameProject +"' data-desc='"+ data.description +"'";
         row += "data-duration='"+ data.duration +"' data-other='"+ data.other +"'";
-        row += " ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>";
+        row += ' ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>';
         row += ' <button class="btn btn-danger removeProject"';
         row += ' data-name="'+data.nameProject+'" data-id="'+data.id+'"';
         row += '><i class="fa fa-trash-o" aria-hidden="true"></i></button>';
@@ -296,8 +301,9 @@ $(document).ready(function(){
                 row += '<td>'+value.stopTime+'</td>';
                 row += '<td>'+value.breakTime+'</td>';
                 row += '<td>'+value.task+'</td>';
-                row += '<td>'+ value.action +'</td>';
+                row += '<td>'+ value.plan +'</td>';
                 row += '<td>'+value.totalTime+'</td>';
+                row += '<td>'+value.plustime+'</td>';
                 row += '<td>';
                 row += '<button class=" btn btn-primary editReport" data-edit="'+ urlEdit +'" data-url="' + edit + '"';
                 row += 'data-id="'+ value.id +'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>';
@@ -324,7 +330,7 @@ $(document).ready(function(){
 
         var day = $('#toDay').val();
         var url = $('#toDay').data('url');
-        // alert(url);
+
         $.ajax({
           url:url,
           type:'GET',
@@ -338,11 +344,11 @@ $(document).ready(function(){
                 $('#project').val(value.project);
                 $('#breakTime').val(value.breakTime);
                 $('#startTime').val(value.startTime);
-                $('#endTime').val(value.stopTime);
+                $('#stopTime').val(value.stopTime);
                 $('#totalTime').val(value.totalTime);
                 $('#task').val(value.task);
-                $('#action').val(value.action);
-                $('#knowledge').val(value.knowledge);
+                $('#action').val(value.plan);
+                $('#knowledge').val(value.note);
                 $('#impression').val(value.impression);
                 $('#userID').val(value.idUser);
                 $('#reportId').val(value.id);
@@ -356,9 +362,10 @@ $(document).ready(function(){
 
           }
         });
+      });
 
 
-  });
+
   //report-list
   $(document).on('click','.modal-delete', function(){
       $('#idReport').val($(this).data('id'));
@@ -398,8 +405,8 @@ $(document).ready(function(){
         $('#endTime').val(response.edit.stopTime);
         $('#totalTime').val(response.edit.totalTime);
         $('#task').val(response.edit.task);
-        $('#action').val(response.edit.action);
-        $('#knowledge').val(response.edit.knowledge);
+        $('#action').val(response.edit.plan);
+        $('#knowledge').val(response.edit.note);
         $('#impression').val(response.edit.impression);
         $('#idUser').val(response.edit.idUser);
         $('#id').val(response.edit.id);
@@ -418,6 +425,30 @@ $(document).ready(function(){
   $('.sendMail').on('click',function(){
 
     document.report.action = $(this).data('url');
-  })
+  });
+  function parseTime(s) {
+
+     var c = s.split(':');
+     return parseInt(c[0]) * 60 + parseInt(c[1]);
+  }
+  $(document).on('change','#stopTime',function(){
+  	var start = $('input[name="startTime"]').val();
+  	var end = $('input[name="stopTime"]').val();
+  	var breakTime = $('input[name="breakTime"]').val();
+  	var total = parseTime(end)- parseTime(start)- breakTime;
+  	var hour = Math.floor(total/60);
+  	var min = total % 60 ;
+
+  $('#totalTime').val(total);
+
+
+
+  });
+  $('#projectID').on('change',function(){
+
+          console.log(this.selectedIndex);
+          $("#project").prop('selectedIndex', this.selectedIndex );
+
+  });
 
 });

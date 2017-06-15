@@ -1,4 +1,4 @@
-<form  id="report" name="report" class="form-horizontal" action="{{ url('create/report')}}" method="post">
+<form  id="report" data-toggle="validator" name="report" class="form-horizontal" action="{{ url('create/report')}}" method="post"  role="form">
    {{ csrf_field() }}
 <div class="row">
 
@@ -20,7 +20,7 @@
         </div>
         <label class="col-md-1 control-label" for="selectbasic">project</label>
        <div class="col-md-3">
-       <!-- <input id="totalTime" name="project" placeholder="project" class=" form-control input-md " required="" type="text"> -->
+
         <select id="project" name="project" class="  form-control">
 
           @foreach($projects as $key => $project)
@@ -31,7 +31,8 @@
       </div>
       <label class="col-md-1 control-label" for="textinput">Break Time</label>
       <div class="col-md-3">
-         <input id="breakTime" name="breakTime" placeholder="mm" class="form-control input-md "  required="" type="text">
+         <input id="breakTime" pattern="^[0-9]{1,}$" data-error="not match format min" name="breakTime" placeholder="mm" class="form-control input-md "  required="" type="text">
+         <div class="help-block with-errors"></div>
       </div>
 
 
@@ -44,16 +45,17 @@
     <div class="form-group">
       <label class=" col-md-1 control-label " for="textinput">Start Time</label>
       <div class="col-md-3">
-        <input id="startTime" name="startTime" placeholder="hh:mm p" class="form-control date input-md TimeInput"   data-date-format=" HH:ii p" required="" type="text">
+        <input id="startTime" name="startTime" pattern="^[0-9:0-9]{1,}$" data-error="not match format hh:mm" placeholder="hh:mm p" class="form-control date input-md " required="" type="text">
+         <div class="help-block with-errors"></div>
       </div>
        <label class="col-md-1 control-label" for="textinput">Stop Time</label>
       <div class="col-md-3">
-        <input id="endTime" name="stopTime" placeholder="hh:mn p" class="form-control date input-md TimeInput "
-        data-date="" data-date-format=" HH:ii p"  required="" type="text">
+        <input id="stopTime" name="stopTime" pattern="^[0-9:0-9]{1,}$" data-error="not match format hh:mm" placeholder="hh:mn p" class="form-control date input-md "required="" type="text">
+        <div class="help-block with-errors"></div>
       </div>
       <label class="col-md-1 control-label" for="textinput">Total Time</label>
       <div class="col-md-3">
-      <input id="totalTime" name="totalTime" placeholder="Total Time" class=" form-control input-md " style="background-color:white;" required="" readonly type="text">
+      <input id="totalTime" name="totalTime"  placeholder="Total Time" class=" form-control input-md " style="background-color:white;" required=""  type="text">
        </div>
 
     </div>
@@ -142,7 +144,7 @@
           </div>
         </div>
         <input  id="toDay" type="hidden" value="" data-url="{{ url('report/day')}}" class="form-control input-md" >
-        
+
 </div>
 <!-- </col-lg-4> -->
 
@@ -157,7 +159,7 @@
   <div class="form-group ">
 
     <div class="col-md-4 col-md-offset-9 ">
-      <button id="save" name="save" type="submit" class="btn btn-success"><span id="btn-title">Save</span></button>
+      <button id="save" name="save" type="submit" class="btn btn-success" ><span id="btn-title">Save</span></button>
       <button id="saveEmail" type="submit" name="saveEmail" data-url="{{url('sendmail')}}" class="btn btn-info sendMail">Save &amp; Send Email</button>
 
     </div>

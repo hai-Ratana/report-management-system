@@ -15,8 +15,14 @@ class Report extends Model
 	];
   static function plusTime($total)
   {
-      $OT = strtotime($total) - 1496822400;
+    $OT =  $total - 480;
       return $OT;
 
+  }
+  static function intToTime($time)
+  {
+    $hour = $time/60;
+    $min = $time%60;
+    return $hour+':'+$min;
   }
 }

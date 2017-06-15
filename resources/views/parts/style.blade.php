@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 <link href='//fonts.googleapis.com/css?family=Baloo Thambi' rel='stylesheet'>
 
- <link href="css/login.css" rel="stylesheet">
+ <link href="{!! asset('/') !!}css/login.css" rel="stylesheet">
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

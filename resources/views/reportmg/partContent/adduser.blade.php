@@ -1,7 +1,7 @@
 <!-- Modal -->
   <div class="modal fade" id="userModal" role="dialog">
     <div class="modal-dialog">
-    
+
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
@@ -10,31 +10,39 @@
         </div>
         <div class="modal-body">
           <form class="form-horizontal " id="frmUser"  >
-           
+
         <!-- Text input-->
         <div class="form-group">
-          <label class="col-md-4 control-label" for="textinput">First Name:</label>  
+          <label class="col-md-4 control-label" for="textinput">First Name:</label>
           <div class="col-md-4">
           <input id="firstname" name="firstname" type="text" placeholder="First Name" class="form-control input-md" required="">
-            
+
           </div>
         </div>
 
         <!-- Text input-->
         <div class="form-group ">
-          <label class="col-md-4 control-label" for="textinput">Last Name:</label>  
+          <label class="col-md-4 control-label" for="textinput">Last Name:</label>
           <div class="col-md-4">
           <input id="lastname" name="lastname" type="text" placeholder="last name" class="form-control input-md" required="">
-            
+
+          </div>
+        </div>
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">User name:</label>
+          <div class="col-md-4">
+          <input id="user" name="user" type="text" placeholder="User name" class="form-control input-md" required="">
+
           </div>
         </div>
 
         <!-- Text input-->
         <div class="form-group">
-          <label class="col-md-4 control-label" for="textinput">Email:</label>  
+          <label class="col-md-4 control-label" for="textinput">Email:</label>
           <div class="col-md-4">
-          <input id="email" name="email" type="email" placeholder="email" class="form-control input-md" required="">
-            
+            <input id="email" type="email" class="form-control" name="email"  data-error="Bruh, that email address is invalid" placeholder="email" required autofocus>
+            <div class="help-block with-errors"></div>
           </div>
         </div>
 
@@ -54,11 +62,11 @@
           <label class="col-md-4 control-label" for="passwordinput">Password: </label>
           <div class="col-md-4">
             <input id="password" name="password" type="password" placeholder="password" class="form-control input-md" required="">
-            
+
           </div>
         </div>
-          
-          
+
+
         </form>
         <input type="hidden" id="userId" name="userId" value="">
          <div class="warningmsg-user ">
@@ -66,15 +74,15 @@
           </div>
         </div>
         <div class="modal-footer footer-users">
-         
+
             <button class="btn btn-success action-user" data-url="{{ url('create/user/ajax') }}" data-edit="{{ url('edit/user/ajax') }}" data-delete="{{ url('delete/user/ajax') }}"><span id="footer-btnsubmit-user"></span></button>
             <button id="" name="button2id" class="btn btn-danger" data-dismiss="modal">reset</button>
-         
-          
-          
+
+
+
         </div>
       </div>
-   
+
 
     </div>
   </div>

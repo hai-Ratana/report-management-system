@@ -8,8 +8,12 @@
  <script src="js/bootstrap-datetimepicker1.min.js"></script>
   <script src="js/bootstrap-datepicker.min.js"></script>
   <script src="js/lumino.glyphs.js"></script>
-  <script src="{!! asset('/') !!}js/event.js"></script>
-  <script src="js/ajaxEvent.js"></script>
+  <script src="{!! asset('/') !!}js/ajaxEvent.js"></script>
+  <script src="{!! asset('/') !!}js/validator.js"></script>
+
+
+
+
 
 
   <script type="text/javascript">
@@ -28,7 +32,7 @@
 
         showMeridian: 1
     });
-    
+
 
 
   </script>

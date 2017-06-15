@@ -18,7 +18,7 @@ class MailController extends Controller
   public function sendMail(){
     $newReport = new Report;
     if(Input::has('idUser') && Input::has('startTime') && Input::has('stopTime') && Input::has('task')){
-  
+
         $newReport->idUser = Input::get('idUser');
         $newReport->projectId = Input::get('projectId');
         $newReport->project = Input::get('project');
